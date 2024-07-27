@@ -46,3 +46,11 @@ group :development do
   # gem "spring"
 end
 
+
+gem "mysql2", "~> 0.5.6"
+
+gem "dotenv-rails", "~> 3.1"
+
+gem "bcrypt", "~> 3.1"
+
+gem "pry", "~> 0.14.2"
