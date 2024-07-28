@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+
+  before_action :authorize, except: %i[ create ]
+  before_action :set_user, only: %i[ show ]
 
   # GET /users
   def index
@@ -26,6 +28,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    @user = current_user
     if @user.update(user_params)
       render json: @user, except: [:password_digest]
     else
@@ -35,6 +38,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @user = current_user
     @user.destroy
   end
 
