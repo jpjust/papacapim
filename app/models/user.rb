@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :sessions, :dependent => :destroy
   has_many :posts, :dependent => :destroy
+  has_many :likes, :dependent => :destroy
 
   validates :login, :name, :presence => true
   validates :login, :uniqueness => true
