@@ -9,4 +9,12 @@ class User < ApplicationRecord
   validates :login, :name, :presence => true
   validates :login, :uniqueness => true
 
+  def following
+    Follower.where(follower_id: self.id).map(&:followed)
+  end
+
+  def followers
+    Follower.where(followed_id: self.id).map(&:follower)
+  end
+
 end

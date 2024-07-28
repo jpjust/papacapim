@@ -23,7 +23,11 @@ class LikesController < ApplicationController
 
   # DELETE /posts/:post_id/likes/1
   def destroy
-    render(json: {}, status: 401) unless @like.user_id == current_user.id
+    unless @like.user_id == current_user.id
+      render json: {}, status: 401
+      return
+    end
+
     @like.destroy
   end
 
