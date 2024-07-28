@@ -18,6 +18,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -28,6 +29,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
+    render(json: {}, status: 401) unless @post.user_id == current_user.id
     @post.destroy
   end
 
@@ -39,6 +41,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit([:user_id, :post_id, :message])
+      params.require(:post).permit([:post_id, :message])
     end
 end
