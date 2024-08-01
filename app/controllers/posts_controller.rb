@@ -5,7 +5,10 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    page = params[:page].to_i || 0
+    offset = ENV['POSTS_FEED_PAGELIMIT'] * page
+    @posts = params[:feed].present? ? Post.where(user_id: current_user.following.map(&:id)) : Post.all
+    @posts = @posts.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset)
 
     render json: @posts
   end
