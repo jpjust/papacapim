@@ -13,12 +13,12 @@ class UsersController < ApplicationController
     offset = ENV['USERLIST_PAGELIMIT'] * page
     @users = User.all.limit(ENV['USERLIST_PAGELIMIT']).offset(offset)
 
-    render json: @users, except: [:password_digest]
+    render json: @users, except: [:id, :password_digest]
   end
 
   # GET /users/login
   def show
-    render json: @user, except: [:password_digest]
+    render json: @user, except: [:id, :password_digest]
   end
 
   # POST /users
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, except: [:password_digest], status: :created, location: @user
+      render json: @user, except: [:id, :password_digest], status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,8 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      render json: @user, except: [:password_digest]
+      Session.where(user_id: @user.id).destroy_all if @user.password.present?
+      render json: @user, except: [:id, :password_digest]
     else
       render json: @user.errors, status: :unprocessable_entity
     end
