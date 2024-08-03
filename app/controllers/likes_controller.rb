@@ -6,7 +6,7 @@ class LikesController < ApplicationController
 
   # GET /posts/:post_id/likes
   def index
-    render json: @post.likes
+    render json: @post.likes, :except => [:user_id]
   end
 
   # POST /posts/:post_id/likes
@@ -15,7 +15,7 @@ class LikesController < ApplicationController
     @like.user_id = current_user.id
 
     if @like.save
-      render json: @like, status: :created, location: post_like_url(@post.id, @like.id)
+      render json: @like, :except => [:user_id], status: :created, location: post_like_url(@post.id, @like.id)
     else
       render json: @like.errors, status: :unprocessable_entity
     end
@@ -36,10 +36,12 @@ class LikesController < ApplicationController
     def set_like
       set_post
       @like = @post.likes.find_by(user_id: current_user.id)
+      render json: {}, status: 404 if @like.nil?
     end
 
     def set_post
       @post = Post.find(params[:post_id])
+      render json: {}, status: 404 if @post.nil?
     end
 
     # Only allow a list of trusted parameters through.

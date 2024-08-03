@@ -34,6 +34,7 @@ class SessionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_session
       @session = Session.find(params[:id])
+      render json: {}, status: 404 if @session.nil?
     end
 
     # Only allow a list of trusted parameters through.

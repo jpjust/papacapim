@@ -7,8 +7,19 @@ class Follower < ApplicationRecord
 
   before_save :check_self_following
 
+  attribute :follower_login
+  attribute :followed_login
+
   def check_self_following
     throw :abort if self.follower_id == self.followed_id
+  end
+
+  def follower_login
+    follower.try(:login)
+  end
+
+  def followed_login
+    followed.try(:login)
   end
 
 end

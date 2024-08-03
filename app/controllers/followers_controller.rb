@@ -6,7 +6,7 @@ class FollowersController < ApplicationController
 
   # GET /users/:user_id/followers
   def index
-    render json: @user.followers, :except => [:password_digest]
+    render json: @user.followers, :except => [:id, :password_digest]
   end
 
   # POST /users/:user_id/followers
@@ -14,7 +14,7 @@ class FollowersController < ApplicationController
     @follower = Follower.new(followed_id: @user.id, follower_id: current_user.id)
 
     if @follower.save
-      render json: @follower, :except => [:password_digest], status: :created, location: user_follower_url(@user.id, @follower.id)
+      render json: @follower, :except => [:follower_id, :followed_id], status: :created, location: user_follower_url(@user.id, @follower.id)
     else
       render json: @follower.errors, status: :unprocessable_entity
     end
@@ -35,10 +35,12 @@ class FollowersController < ApplicationController
     def set_follower
       set_user
       @follower = Follower.find_by(follower_id: current_user.id, followed_id: @user.id)
+      render json: {}, status: 404 if @follower.nil?
     end
 
     def set_user
       @user = User.find_by(login: params[:user_id])
+      render json: {}, status: 404 if @user.nil?
     end
 
     # Only allow a list of trusted parameters through.
