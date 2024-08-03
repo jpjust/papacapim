@@ -1,0 +1,30 @@
+body {
+  padding: 8px;
+  width: 800px;
+  margin: auto;
+  /* background-color: #1a1a1a;
+  color: white; */
+}
+
+h2 {
+  margin-top: 3rem;
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+.code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: lightgray;
+  border-radius: 4px;
+  padding: 4px;
+  /* width: 500px; */
+}
+
+.code-inline {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: lightgray;
+  border-radius: 4px;
+  padding: 4px;
+}
