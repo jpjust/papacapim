@@ -70,26 +70,27 @@
 
     <p>Objeto JSON contendo login e senha.</p>
 
-    <pre class="code">
-{
-  "login": "frankson",
-  "password": "123mudar"
-}
-</pre>
+    <pre class="code"><code>
+      {
+        "login": "frankson",
+        "password": "123mudar"
+      }
+    </code></pre>
 
     <h4>Resposta: 200</h4>
 
     <p>Objeto JSON da sessão criada. Armazene o valor de <span class="code">token</span> para usar nas próximas requisições.</p>
 
-    <pre class="code">
-{
-  "id": 1,
-  "user_login": "frankson",
-  "token": "12835982-bc61-4f48-9561-ec1471969c6e",
-  "ip": "::1",
-  "created_at": "2024-08-03T12:38:19.997Z",
-  "updated_at": "2024-08-03T12:38:19.997Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 1,
+        "user_login": "frankson",
+        "token": "12835982-bc61-4f48-9561-ec1471969c6e",
+        "ip": "::1",
+        "created_at": "2024-08-03T12:38:19.997Z",
+        "updated_at": "2024-08-03T12:38:19.997Z"
+      }
+    </code></pre>
 
     <!-- Encerrar sessão -->
 
@@ -117,26 +118,30 @@
 
     <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário.</p>
 
-    <pre class="code">{
-  "user": {
-    "login": "frankson",
-    "name": "Frankson Barreto",
-    "password": "123mudar",
-    "password_confirmation": "123mudar"
-  }
-}</pre>
+    <pre class="code"><code>
+      {
+        "user": {
+          "login": "frankson",
+          "name": "Frankson Barreto",
+          "password": "123mudar",
+          "password_confirmation": "123mudar"
+        }
+      }
+    </code></pre>
 
     <h4>Resposta: 201</h4>
 
     <p>O corpo da resposta conterá um JSON do usuário criado.</p>
 
-    <pre class="code">{
-  "id": 3,
-  "login": "frankson",
-  "name": "Frankson Barreto",
-  "created_at": "2024-08-03T12:04:12.460Z",
-  "updated_at": "2024-08-03T12:04:12.460Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 3,
+        "login": "frankson",
+        "name": "Frankson Barreto",
+        "created_at": "2024-08-03T12:04:12.460Z",
+        "updated_at": "2024-08-03T12:04:12.460Z"
+      }
+    </code></pre>
 
     <!-- Alterar usuário -->
 
@@ -148,26 +153,30 @@
 
     <p><b>Por razões de segurança, todas as sessões ativas serão excluídas ao alterar a senha e será preciso criar uma nova sessão para continuar acessando a API.</b></p>
 
-    <pre class="code">{
-  "user": {
-    "login": "franks",
-    "name": "Frankson Batista",
-    "password": "senhanova",
-    "password_confirmation": "senhanova"
-  }
-}</pre>
+    <pre class="code"><code>
+      {
+        "user": {
+          "login": "franks",
+          "name": "Frankson Batista",
+          "password": "senhanova",
+          "password_confirmation": "senhanova"
+        }
+      }
+    </code></pre>
 
     <h4>Resposta: 201</h4>
 
     <p>O corpo da resposta conterá um JSON com os novos dados do usuário.</p>
 
-    <pre class="code">{
-  "id": 3,
-  "login": "franks",
-  "name": "Frankson Batista",
-  "created_at": "2024-08-03T12:04:12.460Z",
-  "updated_at": "2024-08-03T13:11:48.310Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 3,
+        "login": "franks",
+        "name": "Frankson Batista",
+        "created_at": "2024-08-03T12:04:12.460Z",
+        "updated_at": "2024-08-03T13:11:48.310Z"
+      }
+    </code></pre>
 
     <!-- Listar usuários -->
 
@@ -184,29 +193,31 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de usuários.</p>
 
-    <pre class="code">[
-  {
-    "id": 1,
-    "login": "just",
-    "name": "J. P. Just",
-    "created_at": "2024-07-28T16:27:42.869Z",
-    "updated_at": "2024-07-28T16:27:42.869Z"
-  },
-  {
-    "id": 2,
-    "login": "teste",
-    "name": "Testador",
-    "created_at": "2024-07-28T16:28:20.995Z",
-    "updated_at": "2024-07-28T16:28:20.995Z"
-  },
-  {
-    "id": 3,
-    "login": "frankson",
-    "name": "Frankson Barreto",
-    "created_at": "2024-08-03T12:04:12.460Z",
-    "updated_at": "2024-08-03T12:04:12.460Z"
-  }
-]</pre>
+    <pre class="code"><code>
+      [
+        {
+          "id": 1,
+          "login": "just",
+          "name": "J. P. Just",
+          "created_at": "2024-07-28T16:27:42.869Z",
+          "updated_at": "2024-07-28T16:27:42.869Z"
+        },
+        {
+          "id": 2,
+          "login": "teste",
+          "name": "Testador",
+          "created_at": "2024-07-28T16:28:20.995Z",
+          "updated_at": "2024-07-28T16:28:20.995Z"
+        },
+        {
+          "id": 3,
+          "login": "frankson",
+          "name": "Frankson Barreto",
+          "created_at": "2024-08-03T12:04:12.460Z",
+          "updated_at": "2024-08-03T12:04:12.460Z"
+        }
+      ]
+    </code></pre>
 
     <!-- Obter usuário específico -->
 
@@ -222,13 +233,15 @@
 
     <p>O corpo da resposta conterá um JSON com os dados do usuário.</p>
 
-    <pre class="code">{
-  "id": 1,
-  "login": "just",
-  "name": "J. P. Just",
-  "created_at": "2024-07-28T16:27:42.869Z",
-  "updated_at": "2024-07-28T16:27:42.869Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 1,
+        "login": "just",
+        "name": "J. P. Just",
+        "created_at": "2024-07-28T16:27:42.869Z",
+        "updated_at": "2024-07-28T16:27:42.869Z"
+      }
+    </code></pre>
 
     <!-- Excluir usuário -->
 
@@ -262,13 +275,15 @@
 
     <p>O corpo da resposta conterá um JSON com os dados da relação de seguidor criada.</p>
 
-    <pre class="code">{
-  "id": 6,
-  "follower_login": "frankson",
-  "followed_login": "just",
-  "created_at": "2024-08-03T13:24:00.637Z",
-  "updated_at": "2024-08-03T13:24:00.637Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 6,
+        "follower_login": "frankson",
+        "followed_login": "just",
+        "created_at": "2024-08-03T13:24:00.637Z",
+        "updated_at": "2024-08-03T13:24:00.637Z"
+      }
+    </code></pre>
 
     <!-- Listar seguidores -->
 
@@ -284,22 +299,24 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de seguidores deste usuário.</p>
 
-    <pre class="code">[
-  {
-    "id": 1,
-    "login": "just",
-    "name": "J. P. Just",
-    "created_at": "2024-07-28T16:27:42.869Z",
-    "updated_at": "2024-07-28T16:27:42.869Z"
-  },
-  {
-    "id": 3,
-    "login": "frankson",
-    "name": "Frankson Barreto",
-    "created_at": "2024-08-03T12:04:12.460Z",
-    "updated_at": "2024-08-03T12:04:12.460Z"
-  }
-]</pre>
+    <pre class="code"><code>
+      [
+        {
+          "id": 1,
+          "login": "just",
+          "name": "J. P. Just",
+          "created_at": "2024-07-28T16:27:42.869Z",
+          "updated_at": "2024-07-28T16:27:42.869Z"
+        },
+        {
+          "id": 3,
+          "login": "frankson",
+          "name": "Frankson Barreto",
+          "created_at": "2024-08-03T12:04:12.460Z",
+          "updated_at": "2024-08-03T12:04:12.460Z"
+        }
+      ]
+    </code></pre>
 
     <!-- Deixar de seguir -->
 
@@ -333,24 +350,28 @@
 
     <p>Um objeto JSON contendo a postagem.</p>
 
-    <pre class="code">{
-  "post": {
-    "message": "Acabei de entrar no Papacapim!"
-  }
-}</pre>
+    <pre class="code"><code>
+      {
+        "post": {
+          "message": "Acabei de entrar no Papacapim!"
+        }
+      }
+    </code></pre>
 
     <h4>Resposta: 201</h4>
 
     <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
 
-    <pre class="code">{
-  "id": 7,
-  "user_login": "frankson",
-  "post_id": null,
-  "message": "Acabei de entrar no Papacapim!",
-  "created_at": "2024-08-03T13:34:18.103Z",
-  "updated_at": "2024-08-03T13:34:18.103Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 7,
+        "user_login": "frankson",
+        "post_id": null,
+        "message": "Acabei de entrar no Papacapim!",
+        "created_at": "2024-08-03T13:34:18.103Z",
+        "updated_at": "2024-08-03T13:34:18.103Z"
+      }
+    </code></pre>
 
     <!-- Responder uma postagem -->
 
@@ -366,24 +387,28 @@
 
     <p>Um objeto JSON contendo a postagem.</p>
 
-    <pre class="code">{
-  "reply": {
-    "message": "Também entrei no Papacapim essa semana. É muito massa!",
-  }
-}</pre>
+    <pre class="code"><code>
+      {
+        "reply": {
+          "message": "Também entrei no Papacapim essa semana. É muito massa!",
+        }
+      }
+    </code></pre>
 
     <h4>Resposta: 201</h4>
 
     <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
 
-    <pre class="code">{
-  "id": 8,
-  "user_login": "just",
-  "post_id": 7,
-  "message": "Também entrei no Papacapim essa semana. É muito massa!",
-  "created_at": "2024-08-03T13:36:56.977Z",
-  "updated_at": "2024-08-03T13:36:56.977Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 8,
+        "user_login": "just",
+        "post_id": 7,
+        "message": "Também entrei no Papacapim essa semana. É muito massa!",
+        "created_at": "2024-08-03T13:36:56.977Z",
+        "updated_at": "2024-08-03T13:36:56.977Z"
+      }
+    </code></pre>
 
     <!-- Listar postagens e feed -->
 
@@ -401,40 +426,42 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
 
-    <pre class="code">[
-  {
-    "id": 2,
-    "user_login": "just",
-    "post_id": null,
-    "message": "Vou passar a usar esta rede.",
-    "created_at": "2024-08-01T14:30:33.000Z",
-    "updated_at": "2024-08-01T14:30:33.000Z"
-  },
-  {
-    "id": 6,
-    "user_login": "gustavo",
-    "post_id": 2,
-    "message": "Esta rede é muito massa!",
-    "created_at": "2024-08-01T14:31:05.000Z",
-    "updated_at": "2024-08-01T14:31:05.000Z"
-  },
-  {
-    "id": 7,
-    "user_login": "frankson",
-    "post_id": null,
-    "message": "Acabei de entrar no Papacapim!",
-    "created_at": "2024-08-03T13:34:18.103Z",
-    "updated_at": "2024-08-03T13:34:18.103Z"
-  },
-  {
-    "id": 8,
-    "user_login": "just",
-    "post_id": 7,
-    "message": "Também entrei no Papacapim essa semana. É muito massa!",
-    "created_at": "2024-08-03T13:36:56.977Z",
-    "updated_at": "2024-08-03T13:36:56.977Z"
-  }
-]</pre>
+    <pre class="code"><code>
+      [
+        {
+          "id": 2,
+          "user_login": "just",
+          "post_id": null,
+          "message": "Vou passar a usar esta rede.",
+          "created_at": "2024-08-01T14:30:33.000Z",
+          "updated_at": "2024-08-01T14:30:33.000Z"
+        },
+        {
+          "id": 6,
+          "user_login": "gustavo",
+          "post_id": 2,
+          "message": "Esta rede é muito massa!",
+          "created_at": "2024-08-01T14:31:05.000Z",
+          "updated_at": "2024-08-01T14:31:05.000Z"
+        },
+        {
+          "id": 7,
+          "user_login": "frankson",
+          "post_id": null,
+          "message": "Acabei de entrar no Papacapim!",
+          "created_at": "2024-08-03T13:34:18.103Z",
+          "updated_at": "2024-08-03T13:34:18.103Z"
+        },
+        {
+          "id": 8,
+          "user_login": "just",
+          "post_id": 7,
+          "message": "Também entrei no Papacapim essa semana. É muito massa!",
+          "created_at": "2024-08-03T13:36:56.977Z",
+          "updated_at": "2024-08-03T13:36:56.977Z"
+        }
+      ]
+    </code></pre>
 
     <!-- Listar postagens do usuário -->
 
@@ -451,24 +478,26 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
 
-    <pre class="code">[
-  {
-    "id": 2,
-    "user_login": "just",
-    "post_id": null,
-    "message": "Vou passar a usar esta rede.",
-    "created_at": "2024-08-01T14:30:33.000Z",
-    "updated_at": "2024-08-01T14:30:33.000Z"
-  },
-  {
-    "id": 8,
-    "user_login": "just",
-    "post_id": 7,
-    "message": "Também entrei no Papacapim essa semana. É muito massa!",
-    "created_at": "2024-08-03T13:36:56.977Z",
-    "updated_at": "2024-08-03T13:36:56.977Z"
-  }
-]</pre>
+    <pre class="code"><code>
+      [
+        {
+          "id": 2,
+          "user_login": "just",
+          "post_id": null,
+          "message": "Vou passar a usar esta rede.",
+          "created_at": "2024-08-01T14:30:33.000Z",
+          "updated_at": "2024-08-01T14:30:33.000Z"
+        },
+        {
+          "id": 8,
+          "user_login": "just",
+          "post_id": 7,
+          "message": "Também entrei no Papacapim essa semana. É muito massa!",
+          "created_at": "2024-08-03T13:36:56.977Z",
+          "updated_at": "2024-08-03T13:36:56.977Z"
+        }
+      ]
+    </code></pre>
 
     <!-- Listar respostas -->
 
@@ -485,16 +514,18 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de respostas.</p>
 
-    <pre class="code">[
-  {
-    "id": 6,
-    "user_login": "gustavo",
-    "post_id": 2,
-    "message": "Esta rede é muito massa!",
-    "created_at": "2024-08-01T14:31:05.000Z",
-    "updated_at": "2024-08-01T14:31:05.000Z"
-  },
-]</pre>
+    <pre class="code"><code>
+      [
+        {
+          "id": 6,
+          "user_login": "gustavo",
+          "post_id": 2,
+          "message": "Esta rede é muito massa!",
+          "created_at": "2024-08-01T14:31:05.000Z",
+          "updated_at": "2024-08-01T14:31:05.000Z"
+        },
+      ]
+    </code></pre>
 
     <!-- Excluir postagem -->
 
@@ -534,13 +565,15 @@
 
     <p>O corpo da resposta conterá um JSON com dados da curtida.</p>
 
-    <pre class="code">{
-  "id": 2,
-  "user_login": "frankson",
-  "post_id": 7,
-  "created_at": "2024-08-03T13:49:23.226Z",
-  "updated_at": "2024-08-03T13:49:23.226Z"
-}</pre>
+    <pre class="code"><code>
+      {
+        "id": 2,
+        "user_login": "frankson",
+        "post_id": 7,
+        "created_at": "2024-08-03T13:49:23.226Z",
+        "updated_at": "2024-08-03T13:49:23.226Z"
+      }
+    </code></pre>
 
     <!-- Listar curtidas -->
 
@@ -556,22 +589,24 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de curtidas.</p>
 
-    <pre class="code">[
-  {
-    "id": 2,
-    "user_login": "just",
-    "post_id": 1,
-    "created_at": "2024-08-03T13:49:23.226Z",
-    "updated_at": "2024-08-03T13:49:23.226Z"
-  },
-  {
-    "id": 3,
-    "user_login": "frankson",
-    "post_id": 1,
-    "created_at": "2024-08-03T10:51:44.000Z",
-    "updated_at": "2024-08-03T10:51:44.000Z"
-  }
-]</pre>
+    <pre class="code"><code>
+      [
+        {
+          "id": 2,
+          "user_login": "just",
+          "post_id": 1,
+          "created_at": "2024-08-03T13:49:23.226Z",
+          "updated_at": "2024-08-03T13:49:23.226Z"
+        },
+        {
+          "id": 3,
+          "user_login": "frankson",
+          "post_id": 1,
+          "created_at": "2024-08-03T10:51:44.000Z",
+          "updated_at": "2024-08-03T10:51:44.000Z"
+        }
+      ]
+    </code></pre>
 
     <!-- Remover curtida -->
 

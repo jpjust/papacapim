@@ -1,6 +1,6 @@
 body {
   padding: 8px;
-  width: 800px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -13,8 +13,9 @@ h3 {
 }
 
 .code {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: monospace;
   background-color: lightgray;
   border-radius: 4px;
   padding: 4px;
+  overflow-x: auto;
 }
