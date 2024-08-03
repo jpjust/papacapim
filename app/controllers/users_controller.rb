@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     render json: @users, except: [:password_digest]
   end
 
-  # GET /users/1
+  # GET /users/login
   def show
     render json: @user, except: [:password_digest]
   end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/login
   def update
     @user = current_user
     if @user.update(user_params)
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/login
   def destroy
     @user = current_user
     @user.destroy
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(login: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

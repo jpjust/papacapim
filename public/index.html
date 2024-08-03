@@ -174,12 +174,12 @@
 
     <!-- Obter usuário específico -->
 
-    <h3>Obter usuário específico: <span class="code">GET /users/{id}</span></h3>
+    <h3>Obter usuário específico: <span class="code">GET /users/{login}</span></h3>
 
     <h4>Parâmetros de URL</h4>
 
     <ul>
-      <li><span class="code">{id}</span>: (inteiro) ID do usuário que deseja obter.</li>
+      <li><span class="code">{login}</span>: (inteiro) Login do usuário que deseja obter.</li>
     </ul>
 
     <h4>Resposta: 200</h4>
@@ -212,12 +212,12 @@
 
     <!-- Seguir alguém -->
 
-    <h3>Seguir alguém: <span class="code">POST /users/{id}/followers</span></h3>
+    <h3>Seguir alguém: <span class="code">POST /users/{login}/followers</span></h3>
 
     <h4>Parâmetros de URL</h4>
 
     <ul>
-      <li><span class="code">{id}</span>: (inteiro): ID do usuário que você deseja seguir.</li>
+      <li><span class="code">{login}</span>: (inteiro): Login do usuário que você deseja seguir.</li>
     </ul>
 
     <h4>Resposta: 201</h4>
@@ -234,12 +234,12 @@
 
     <!-- Listar seguidores -->
 
-    <h3>Listar seguidores: <span class="code">GET /users/{id}/followers</span></h3>
+    <h3>Listar seguidores: <span class="code">GET /users/{login}/followers</span></h3>
 
     <h4>Parâmetros de URL</h4>
 
     <ul>
-      <li><span class="code">{id}</span>: (inteiro) ID do usuário o qual você quer listar os seguidores.</li>
+      <li><span class="code">{login}</span>: (inteiro) Login do usuário o qual você quer listar os seguidores.</li>
     </ul>
 
     <h4>Resposta: 200</h4>
@@ -265,12 +265,12 @@
 
     <!-- Deixar de seguir -->
 
-    <h3>Deixar de seguir: <span class="code">DELETE /users/{id}/followers/1</span></h3>
+    <h3>Deixar de seguir: <span class="code">DELETE /users/{login}/followers/1</span></h3>
 
     <h4>Parâmetros de URL</h4>
 
     <ul>
-      <li><span class="code">{id}</span>: (inteiro) ID do usuário o qual você quer deixar de seguir.</li>
+      <li><span class="code">{login}</span>: (inteiro) Login do usuário o qual você quer deixar de seguir.</li>
     </ul>
 
     <h4>Resposta: 204</h4>
