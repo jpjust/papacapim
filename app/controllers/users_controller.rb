@@ -3,9 +3,15 @@ class UsersController < ApplicationController
   before_action :authorize, except: %i[ create ]
   before_action :set_user, only: %i[ show ]
 
+  # TODO:
+  # - search users by name and login
+  # - get user by login
+
   # GET /users
   def index
-    @users = User.all
+    page = params[:page].to_i || 0
+    offset = ENV['USERLIST_PAGELIMIT'] * page
+    @users = User.all.limit(ENV['USERLIST_PAGELIMIT']).offset(offset)
 
     render json: @users, except: [:password_digest]
   end
