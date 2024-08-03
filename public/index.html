@@ -6,6 +6,12 @@
     <title>Papacapim | Documentação da API</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="/papacapim.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   </head>
   <body>
     <h1 id="top">Documentação da API Papacapim</h1>
@@ -70,7 +76,7 @@
 
     <p>Objeto JSON contendo login e senha.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "login": "frankson",
         "password": "123mudar"
@@ -81,7 +87,7 @@
 
     <p>Objeto JSON da sessão criada. Armazene o valor de <span class="code">token</span> para usar nas próximas requisições.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 1,
         "user_login": "frankson",
@@ -118,7 +124,7 @@
 
     <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "user": {
           "login": "frankson",
@@ -133,7 +139,7 @@
 
     <p>O corpo da resposta conterá um JSON do usuário criado.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 3,
         "login": "frankson",
@@ -153,7 +159,7 @@
 
     <p><b>Por razões de segurança, todas as sessões ativas serão excluídas ao alterar a senha e será preciso criar uma nova sessão para continuar acessando a API.</b></p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "user": {
           "login": "franks",
@@ -168,7 +174,7 @@
 
     <p>O corpo da resposta conterá um JSON com os novos dados do usuário.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 3,
         "login": "franks",
@@ -193,7 +199,7 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de usuários.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       [
         {
           "id": 1,
@@ -233,7 +239,7 @@
 
     <p>O corpo da resposta conterá um JSON com os dados do usuário.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 1,
         "login": "just",
@@ -275,7 +281,7 @@
 
     <p>O corpo da resposta conterá um JSON com os dados da relação de seguidor criada.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 6,
         "follower_login": "frankson",
@@ -299,7 +305,7 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de seguidores deste usuário.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       [
         {
           "id": 1,
@@ -350,7 +356,7 @@
 
     <p>Um objeto JSON contendo a postagem.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "post": {
           "message": "Acabei de entrar no Papacapim!"
@@ -362,7 +368,7 @@
 
     <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 7,
         "user_login": "frankson",
@@ -387,7 +393,7 @@
 
     <p>Um objeto JSON contendo a postagem.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "reply": {
           "message": "Também entrei no Papacapim essa semana. É muito massa!",
@@ -399,7 +405,7 @@
 
     <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 8,
         "user_login": "just",
@@ -426,7 +432,7 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       [
         {
           "id": 2,
@@ -478,7 +484,7 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       [
         {
           "id": 2,
@@ -514,7 +520,7 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de respostas.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       [
         {
           "id": 6,
@@ -565,7 +571,7 @@
 
     <p>O corpo da resposta conterá um JSON com dados da curtida.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       {
         "id": 2,
         "user_login": "frankson",
@@ -589,7 +595,7 @@
 
     <p>O corpo da resposta conterá um JSON com a lista de curtidas.</p>
 
-    <pre class="code"><code>
+    <pre><code>
       [
         {
           "id": 2,
@@ -624,6 +630,10 @@
 
     <p><a href="#top">Retornar ao início</a></p>
 
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- highlight.js -->
+    <script>hljs.highlightAll();</script>
   </body>
 </html>

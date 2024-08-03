@@ -12,10 +12,14 @@ h3 {
   margin-top: 2rem;
 }
 
+pre {
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
 .code {
   font-family: monospace;
   background-color: lightgray;
   border-radius: 4px;
   padding: 4px;
-  overflow-x: auto;
 }
