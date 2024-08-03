@@ -53,11 +53,11 @@
     <h2>Autenticação</h2>
 
     <p>
-      Todos os endpoints, com exceção do endpoint para criação de um novo usuário, requerem autenticação. Desta forma, apenas usuários autenticados poderão acessar a API e todas os objetos que forem criados serão associados ao usuário autenticado.
+      Todos os endpoints, com exceção do endpoint para criação de um novo usuário, requerem autenticação. Desta forma, apenas usuários autenticados poderão acessar a API e todos os objetos que forem criados serão associados ao usuário autenticado.
     </p>
 
     <p>
-      A autenticação no Papacapim funciona através de um token de sessão. Este token será enviado a cada requisição no cabeçalho HTTP através da chave <span class="code">x-session-token</span>. O procedimento é criar uma nova sessão enviando usuário e senha e armazenar o token. Para encerrar a sessão (uma espécie de log-out), basta deletar a sessão previamente criada.
+      A autenticação no Papacapim funciona através de um token de sessão. Este token deverá ser enviado a cada requisição no cabeçalho HTTP através da chave <span class="code">x-session-token</span>. Para obter um token basta criar uma nova sessão usando seu usuário e senha (caso não tenha usuário, crie antes usando o endpoint Criar usuário). Para encerrar a sessão (uma espécie de log-out), basta deletar a sessão previamente criada.
     </p>
 
     <!-- Nova sessão -->
