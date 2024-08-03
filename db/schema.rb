@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_28_180349) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_03_164655) do
   create_table "followers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "follower_id", null: false
     t.bigint "followed_id", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_180349) do
     t.string "message", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["message"], name: "index_posts_on_message", type: :fulltext
     t.index ["post_id"], name: "index_posts_on_post_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -57,7 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_180349) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["login"], name: "index_users_on_login", unique: true, using: :hash
+    t.index ["login"], name: "index_users_on_login", unique: true
+    t.index ["name"], name: "index_users_on_name", type: :fulltext
   end
 
   add_foreign_key "followers", "users", column: "followed_id"
