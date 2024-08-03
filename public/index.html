@@ -323,7 +323,7 @@
 
     <h4>Corpo</h4>
 
-    <p>Um objeto JSON contendo a postagem, incluindo a mensagem.</p>
+    <p>Um objeto JSON contendo a postagem.</p>
 
     <pre class="code">{
   "post": {
@@ -346,16 +346,21 @@
 
     <!-- Responder uma postagem -->
 
-    <h3>Responder (comentar) uma postagem: <span class="code">POST /posts</span></h3>
+    <h3>Responder uma postagem: <span class="code">POST /posts/{id}/replies</span></h3>
+
+    <h4>Parâmetros de URL</h4>
+
+    <ul>
+      <li><span class="code">{id}</span>: (inteiro) ID da postagem que será respondida.</li>
+    </ul>
 
     <h4>Corpo</h4>
 
-    <p>Um objeto JSON contendo a postagem, incluindo a mensagem e o ID da postagem que você está respondendo ou comentando.</p>
+    <p>Um objeto JSON contendo a postagem.</p>
 
     <pre class="code">{
-  "post": {
+  "reply": {
     "message": "Também entrei no Papacapim essa semana. É muito massa!",
-    "post_id": 7
   }
 }</pre>
 
@@ -420,6 +425,66 @@
     "created_at": "2024-08-03T13:36:56.977Z",
     "updated_at": "2024-08-03T13:36:56.977Z"
   }
+]</pre>
+
+    <!-- Listar postagens do usuário -->
+
+    <h3>Listar postagens do usuário: <span class="code">GET /users/{login}/posts</span></h3>
+
+    <h4>Parâmetros de URL</h4>
+
+    <ul>
+      <li><span class="code">{login}</span>: (string) Determina qual usuário autor das postagens a serem listadas.</li>
+      <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as postagens sejam listadas ao mesmo tempo.</li>
+    </ul>
+
+    <h4>Resposta: 200</h4>
+
+    <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
+
+    <pre class="code">[
+  {
+    "id": 2,
+    "user_login": "just",
+    "post_id": null,
+    "message": "Vou passar a usar esta rede.",
+    "created_at": "2024-08-01T14:30:33.000Z",
+    "updated_at": "2024-08-01T14:30:33.000Z"
+  },
+  {
+    "id": 8,
+    "user_login": "just",
+    "post_id": 7,
+    "message": "Também entrei no Papacapim essa semana. É muito massa!",
+    "created_at": "2024-08-03T13:36:56.977Z",
+    "updated_at": "2024-08-03T13:36:56.977Z"
+  }
+]</pre>
+
+    <!-- Listar respostas -->
+
+    <h3>Listar respostas: <span class="code">GET /posts/{id}/replies</span></h3>
+
+    <h4>Parâmetros de URL</h4>
+
+    <ul>
+      <li><span class="code">{id}</span>: (inteiro) Determina o ID da postagem da qual serão listadas as respostas.</li>
+      <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as postagens sejam listadas ao mesmo tempo.</li>
+    </ul>
+
+    <h4>Resposta: 200</h4>
+
+    <p>O corpo da resposta conterá um JSON com a lista de respostas.</p>
+
+    <pre class="code">[
+  {
+    "id": 6,
+    "user_login": "gustavo",
+    "post_id": 2,
+    "message": "Esta rede é muito massa!",
+    "created_at": "2024-08-01T14:31:05.000Z",
+    "updated_at": "2024-08-01T14:31:05.000Z"
+  },
 ]</pre>
 
     <!-- Excluir postagem -->

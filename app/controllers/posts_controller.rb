@@ -3,19 +3,19 @@ class PostsController < ApplicationController
   before_action :authorize
   before_action :set_post, only: %i[ show update destroy ]
 
-  # TODO:
-  # - list posts from user
-  # - get a specific post
-  # - list replies of a post
-
   # GET /posts
   def index
     page = params[:page].to_i || 0
     offset = ENV['POSTS_FEED_PAGELIMIT'] * page
-    @posts = params[:feed].to_i == 1 ? Post.where(user_id: current_user.following.map(&:id)) : Post.all
-    @posts = @posts.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset)
+    @posts = Post.all
 
-    render json: @posts, :except => [:user_id]
+    if params[:user_id].present?
+      @posts = @posts.where(user_id: User.find_by(login: params[:user_id]))
+    elsif params[:feed].to_i == 1
+      @posts = Post.where(user_id: current_user.following.map(&:id))
+    end
+
+    render json: @posts.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset), :except => [:user_id]
   end
 
   # GET /posts/1
@@ -50,6 +50,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit([:post_id, :message])
+      params.require(:post).permit([:message])
     end
 end
