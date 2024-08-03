@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
+
   before_action :authorize, only: %i[ index destroy ]
+  before_action :set_session, only: %i[ destroy ]
 
   # GET /sessions
   def index
