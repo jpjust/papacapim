@@ -8,19 +8,19 @@
     <link href="/papacapim.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Documentação da API Papacapim</h1>
+    <h1 id="top">Documentação da API Papacapim</h1>
 
     <p>
       Bem-vindo(a) à documentação da API Papacapim. Este documento será seu guia para entender os endpoints da API, ajudando-o a construir um font-end para integração com nosso back-end. Esta documentação está dividida da seguinte maneira:
     </p>
 
     <ol>
-      <li>Como acessar a API</li>
-      <li>Autenticação</li>
-      <li>Usuários</li>
-      <li>Seguidores</li>
-      <li>Postagens</li>
-      <li>Curtidas</li>
+      <li><a href="#howto">Como acessar a API</a></li>
+      <li><a href="#auth">Autenticação</a></li>
+      <li><a href="#users">Usuários</a></li>
+      <li><a href="#followers">Seguidores</a></li>
+      <li><a href="#posts">Postagens</a></li>
+      <li><a href="#likes">Curtidas</a></li>
     </ol>
 
     <p>
@@ -35,7 +35,7 @@
 
     <!-- COMO ACESSAR A API -->
 
-    <h2>Como acessar a API</h2>
+    <h2 id="howto">Como acessar a API</h2>
 
     <p>
       A API Papacapim é aberta e qualquer um pode acessá-la para praticar a criação de front-ends com consumo de APIs. Como o back-end está hospedado em um netbook antigo na minha própria casa e meu provedor faz algumas limitações nas portas no acesso IPv4, foi preciso fazer um redirecionamento de portas para permitir o acesso externo (esta limitação não existe no acesso IPv6). Então segue abaixo as instruções para acessar o back-end.
@@ -48,16 +48,18 @@
       <li>Protocolo: HTTPS</li>
     </ul>
 
+    <p><a href="#top">Retornar ao início</a></p>
+
     <!-- AUTENTICAÇÃO -->
 
-    <h2>Autenticação</h2>
+    <h2 id="auth">Autenticação</h2>
 
     <p>
       Todos os endpoints, com exceção do endpoint para criação de um novo usuário, requerem autenticação. Desta forma, apenas usuários autenticados poderão acessar a API e todos os objetos que forem criados serão associados ao usuário autenticado.
     </p>
 
     <p>
-      A autenticação no Papacapim funciona através de um token de sessão. Este token deverá ser enviado a cada requisição no cabeçalho HTTP através da chave <span class="code">x-session-token</span>. Para obter um token basta criar uma nova sessão usando seu usuário e senha (caso não tenha usuário, crie antes usando o endpoint Criar usuário). Para encerrar a sessão (uma espécie de log-out), basta deletar a sessão previamente criada.
+      A autenticação no Papacapim funciona através de um token de sessão. Este token deverá ser enviado a cada requisição no cabeçalho HTTP através da chave <span class="code">x-session-token</span>. Para obter um token basta criar uma nova sessão usando seu usuário e senha (caso não tenha usuário, crie antes usando o endpoint <a href="#users_create">Criar usuário</a>). Para encerrar a sessão (uma espécie de log-out), basta deletar a sessão previamente criada.
     </p>
 
     <!-- Nova sessão -->
@@ -97,9 +99,11 @@
 
     <p>Sem conteúdo.</p>
 
+    <p><a href="#top">Retornar ao início</a></p>
+
     <!-- USUÁRIOS -->
 
-    <h2>Usuários</h2>
+    <h2 id="users">Usuários</h2>
 
     <p>
       Nos endpoints a seguir trataremos da manipulação de usuários da plataforma. A criação de novos usuários é livre e pode ser feita por qualquer um (este é o único endpoint que não precisa de autenticação). Após criado um usuário você poderá autenticá-lo e acessar os outros endpoints.
@@ -107,7 +111,7 @@
 
     <!-- Criar usuário -->
 
-    <h3>Criar usuário: <span class="code">POST /users</span></h3>
+    <h3 id="users_create">Criar usuário: <span class="code">POST /users</span></h3>
 
     <h4>Corpo</h4>
 
@@ -234,9 +238,11 @@
 
     <p>Sem conteúdo.</p>
 
+    <p><a href="#top">Retornar ao início</a></p>
+
     <!-- SEGUIDORES -->
 
-    <h2>Seguidores</h2>
+    <h2 id="followers">Seguidores</h2>
 
     <p>
       Os endpoints de seguidores permitirão que um usuário siga alguém ou liste os seguidores de alguém.
@@ -309,9 +315,11 @@
 
     <p>Sem conteúdo.</p>
 
+    <p><a href="#top">Retornar ao início</a></p>
+
     <!-- POSTAGENS -->
 
-    <h2>Postagens</h2>
+    <h2 id="posts">Postagens</h2>
 
     <p>
       Nos endpoints a seguir trataremos da manipulação de postagens, possibilitando a criação de novas postagens, respostas a postagens de outros usuários e exclusão de postagens.
@@ -502,9 +510,11 @@
 
     <p>Sem conteúdo.</p>
 
+    <p><a href="#top">Retornar ao início</a></p>
+
     <!-- CURTIDAS -->
 
-    <h2>Curtidas</h2>
+    <h2 id="likes">Curtidas</h2>
 
     <p>
       Nos endpoints a seguir trataremos da manipulação de curtidas em uma postagem. Eles permitirão curtir uma postagem, descurtir e visualizar curtidas.
@@ -576,6 +586,8 @@
     <h4>Resposta: 204</h4>
 
     <p>Sem conteúdo.</p>
+
+    <p><a href="#top">Retornar ao início</a></p>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
