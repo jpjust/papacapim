@@ -3,11 +3,16 @@ class PostsController < ApplicationController
   before_action :authorize
   before_action :set_post, only: %i[ show update destroy ]
 
+  # TODO:
+  # - list posts from user
+  # - get a specific post
+  # - list replies of a post
+
   # GET /posts
   def index
     page = params[:page].to_i || 0
     offset = ENV['POSTS_FEED_PAGELIMIT'] * page
-    @posts = params[:feed].present? ? Post.where(user_id: current_user.following.map(&:id)) : Post.all
+    @posts = params[:feed].to_i == 1 ? Post.where(user_id: current_user.following.map(&:id)) : Post.all
     @posts = @posts.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset)
 
     render json: @posts
