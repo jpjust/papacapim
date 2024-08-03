@@ -7,6 +7,8 @@ class Follower < ApplicationRecord
 
   before_save :check_self_following
 
+  default_scope { order(created_at: :desc) }
+
   attribute :follower_login
   attribute :followed_login
 

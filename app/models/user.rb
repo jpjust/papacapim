@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :login, :name, :presence => true
   validates :login, :uniqueness => true
 
+  default_scope { order(created_at: :desc) }
+
   def following
     Follower.where(follower_id: self.id).map(&:followed)
   end

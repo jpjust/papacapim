@@ -7,6 +7,8 @@ class Post < ApplicationRecord
 
   validates :user_id, :message, :presence => true
 
+  default_scope { order(created_at: :desc) }
+
   attribute :user_login
 
   def user_login
