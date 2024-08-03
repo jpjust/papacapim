@@ -134,6 +134,37 @@
   "updated_at": "2024-08-03T12:04:12.460Z"
 }</pre>
 
+    <!-- Alterar usuário -->
+
+    <h3>Alterar usuário: <span class="code">PATCH /users/1</span></h3>
+
+    <h4>Corpo</h4>
+
+    <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário. Neste caso os campos são todos opcionais. Por exemplo: se deseja mudar apenas o login, basta enviar <span class="code">login</span>; se deseja apenas alterar a senha, basta enviar <span class="code">password</span> e <span class="code">password_confirmation</span>. É possível enviar tudo para alterar todos os dados caso queira.</p>
+
+    <p><b>Por razões de segurança, todas as sessões ativas serão excluídas ao alterar a senha e será preciso criar uma nova sessão para continuar acessando a API.</b></p>
+
+    <pre class="code">{
+  "user": {
+    "login": "franks",
+    "name": "Frankson Batista",
+    "password": "senhanova",
+    "password_confirmation": "senhanova"
+  }
+}</pre>
+
+    <h4>Resposta: 201</h4>
+
+    <p>O corpo da resposta conterá um JSON com os novos dados do usuário.</p>
+
+    <pre class="code">{
+  "id": 3,
+  "login": "franks",
+  "name": "Frankson Batista",
+  "created_at": "2024-08-03T12:04:12.460Z",
+  "updated_at": "2024-08-03T13:11:48.310Z"
+}</pre>
+
     <!-- Listar usuários -->
 
     <h3>Listar usuários: <span class="code">GET /users</span></h3>

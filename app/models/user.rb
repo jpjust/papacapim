@@ -9,6 +9,13 @@ class User < ApplicationRecord
   validates :login, :name, :presence => true
   validates :login, :uniqueness => true
 
+  after_save :check_password_change
+
+  def check_password_change
+    # Whenever the user changes the password we delete all sessions for security reasons
+    Session.where(user_id: self.id).destroy_all if self.password_digest_changed?
+  end
+
   def following
     Follower.where(follower_id: self.id).map(&:followed)
   end
