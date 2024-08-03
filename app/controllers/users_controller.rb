@@ -3,17 +3,18 @@ class UsersController < ApplicationController
   before_action :authorize, except: %i[ create ]
   before_action :set_user, only: %i[ show ]
 
-  # TODO:
-  # - search users by name and login
-  # - get user by login
-
   # GET /users
   def index
+    # Pagination
     page = params[:page].to_i || 0
     offset = ENV['USERLIST_PAGELIMIT'] * page
-    @users = User.all.limit(ENV['USERLIST_PAGELIMIT']).offset(offset)
+    @users = User.all
 
-    render json: @users, except: [:id, :password_digest]
+    # Filters (for user search)
+    search_query = "%#{params[:search].gsub(/\s+/, '%')}%"
+    @users = @users.where('login LIKE ? OR name LIKE ?', search_query, search_query) if params[:search].present?
+
+    render json: @users.limit(ENV['USERLIST_PAGELIMIT']).offset(offset), except: [:id, :password_digest]
   end
 
   # GET /users/login
