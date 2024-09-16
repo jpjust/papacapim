@@ -79,13 +79,15 @@ chmod 700 config db .env
 chmod 600 config/database.yml config/secrets.yml
 ```
 
-Compile os assets do Rails e fala a migração inicial do banco de dados.
+Faça a migração inicial do banco de dados.
 
 ```sh
-bundle exec rake assets:precompile db:migrate RAILS_ENV=production
+bundle exec rake db:migrate RAILS_ENV=production
 ```
 
-Caso esteja em uma hospedagem compartilhada, verifique o arquivo `.htaccess`. É preciso indicar o caminho do wrapper do Ruby. O caminho do wrapper pode ser encontrado da seguinte forma:
+## Deploy com Passenger
+
+Caso esteja em uma hospedagem compartilhada e queira usar o Passenger, verifique o arquivo `.htaccess`. É preciso indicar o caminho do wrapper do Ruby. O caminho do wrapper pode ser encontrado da seguinte forma:
 
 ```sh
 passenger-config about ruby-command
@@ -111,6 +113,42 @@ Caso esteja rodando Apache 2 em uma VM, instale o pacote `libapache2-mod-passeng
 
     # APENAS PARA USO EM AMBIENTE DE TESTE: habilita mensagens amigáveis na tela de erro
     # PassengerFriendlyErrorPages on
+
+    # Opcional: caminhos personalizados para os logs do Apache
+    ErrorLog /var/log/apache2/api.papacapim.just.pro.br/error.log
+    CustomLog /var/log/apache2/api.papacapim.just.pro.br/access.log combined
+</VirtualHost>
+```
+
+Para ativar a configuração, execute:
+
+```sh
+a2ensite
+```
+
+## Deploy com Puma
+
+No caso de usar o Puma, copie o arquivo `puma-papacapim.service` para `/etc/systemd/system` e ative o serviço:
+
+```sh
+cp puma-papacapim.service /etc/systemd/system
+systemctl daemon-reload
+systemctl enable puma-papacapim
+systemctl start puma-papacapim
+```
+
+No arquivo de configuração do Virtual Host no Apache será preciso fazer um proxy reverso para o processo do Puma:
+
+```
+<VirtualHost *:80>
+    ServerName api.papacapim.just.pro.br
+    ServerAdmin app@just.pro.br
+    DocumentRoot /var/www/papacapim/public
+
+    # Proxy reverso para o Puma
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:3002/
+    ProxyPassReverse / http://127.0.0.1:3002/
 
     # Opcional: caminhos personalizados para os logs do Apache
     ErrorLog /var/log/apache2/api.papacapim.just.pro.br/error.log
