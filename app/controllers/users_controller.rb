@@ -7,14 +7,14 @@ class UsersController < ApplicationController
   def index
     # Pagination
     page = params[:page].to_i || 0
-    offset = ENV['USERLIST_PAGELIMIT'] * page
+    offset = ENV['USERLIST_PAGELIMIT'].to_i * page
     @users = User.all
 
     # Filters (for user search)
     search_query = params[:search].to_s.strip.gsub(/\s+/, ',')
     @users = @users.where('MATCH(name) AGAINST(?)', search_query) if params[:search].present?
 
-    render json: @users.limit(ENV['USERLIST_PAGELIMIT']).offset(offset), except: [:id, :password_digest]
+    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), except: [:id, :password_digest]
   end
 
   # GET /users/login
