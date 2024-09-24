@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     page = params[:page].to_i || 0
-    offset = ENV['POSTS_FEED_PAGELIMIT'] * page
+    offset = ENV['POSTS_FEED_PAGELIMIT'].to_i * page
     @posts = Post.all
 
     if params[:user_id].present?
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
       @posts = @posts.where('MATCH(message) AGAINST(?)', search_query) 
     end
 
-    render json: @posts.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset), :except => [:user_id]
+    render json: @posts.limit(ENV['POSTS_FEED_PAGELIMIT'].to_i).offset(offset), :except => [:user_id]
   end
 
   # GET /posts/1
