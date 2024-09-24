@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     elsif params[:feed].to_i == 1
       @posts = Post.where(user_id: current_user.following.map(&:followed_id))
     elsif params[:search].present?
-      search_query = params[:search].to_s.strip.gsub(/\s+/, ',')
+      search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
       @posts = @posts.where('MATCH(message) AGAINST(?)', search_query) 
     end
 
