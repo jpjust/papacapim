@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       @posts = Post.where(user_id: current_user.following.map(&:followed_id))
     elsif params[:search].present?
       search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
-      @posts = @posts.where('MATCH(message) AGAINST(?)', search_query) 
+      @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query) 
     end
 
     render json: @posts.limit(ENV['POSTS_FEED_PAGELIMIT'].to_i).offset(offset), :except => [:user_id]

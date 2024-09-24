@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     # Filters (for user search)
     search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
-    @users = @users.where('MATCH(name) AGAINST(?)', search_query) if params[:search].present?
+    @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
     render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), except: [:id, :password_digest]
   end
