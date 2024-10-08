@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    render json: @post, :except => [:user_id]
+    render json: @post, :include => [:replies, :likes], :except => [:user_id]
   end
 
   # POST /posts
