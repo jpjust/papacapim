@@ -22,11 +22,7 @@ class FollowersController < ApplicationController
 
   # DELETE /users/:user_id/followers/1
   def destroy
-    unless @follower.try(:follower_id) == current_user.id 
-      render json: {}, status: 401
-      return
-    end
-
+    render json: {}, status: 401 unless @follower.try(:follower_id) == current_user.id 
     @follower.destroy
   end
 

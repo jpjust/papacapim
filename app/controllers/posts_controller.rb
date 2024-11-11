@@ -40,7 +40,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    render(json: {}, status: 401) unless @post.user_id == current_user.id
+    render json: {}, status: 401 unless @post.user_id == current_user.id
     @post.destroy
   end
 
