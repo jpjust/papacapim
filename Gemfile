@@ -58,3 +58,5 @@ gem "pry", "~> 0.14.2"
 gem "sd_notify", "~> 0.1.1"
 
 gem "rack-cors", "~> 2.0"
+
+gem "exception_notification", "~> 4.6"

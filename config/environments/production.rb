@@ -55,7 +55,19 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "papacapim_production"
 
+  ## ActionMailer
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp # :smtp ou :postmark
+  config.action_mailer.smtp_settings = {
+    :address => ENV['MAIL_SERVER'],
+    :port => ENV['MAIL_PORT'],
+    :user_name => ENV['MAIL_LOGIN'],
+    :password => ENV['MAIL_PASSWORD'],
+    :authentication => ENV['MAIL_AUTH'],
+    :ssl => true,
+    # :open_timeout => 30,
+    # :read_timeout => 30
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
