@@ -1,632 +1,627 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Papacapim | Documentação da API</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="/papacapim.css" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Papacapim | Documentação da API</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="/papacapim.css" rel="stylesheet">
 
-    <!-- highlight.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  </head>
-  <body>
-    <h1 id="top">Documentação da API Papacapim</h1>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
 
-    <p>
-      Bem-vindo(a) à documentação da API Papacapim. Este documento será seu guia para entender os endpoints da API, ajudando-o a construir um font-end para integração com nosso back-end. Esta documentação está dividida da seguinte maneira:
-    </p>
+  <!-- highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
 
-    <ol>
-      <li><a href="#howto">Como acessar a API</a></li>
-      <li><a href="#auth">Autenticação</a></li>
-      <li><a href="#users">Usuários</a></li>
-      <li><a href="#followers">Seguidores</a></li>
-      <li><a href="#posts">Postagens</a></li>
-      <li><a href="#likes">Curtidas</a></li>
-    </ol>
+<body>
+  <h1 id="top">Documentação da API Papacapim</h1>
 
-    <p>
-      Em cada tópico da documentação será exibido um exemplo do corpo da requisição e da resposta. As chaves JSON em cada exemplo são auto-explicativas.
-    </p>
+  <p>
+    Bem-vindo(a) à documentação da API Papacapim. Este documento será seu guia para entender os endpoints da API,
+    ajudando-o a construir um font-end para integração com nosso back-end. Esta documentação está dividida da seguinte
+    maneira:
+  </p>
 
-    <p><b>O que é a API Papacapim?</b></p>
+  <ol>
+    <li><a href="#howto">Como acessar a API</a></li>
+    <li><a href="#auth">Autenticação</a></li>
+    <li><a href="#users">Usuários</a></li>
+    <li><a href="#followers">Seguidores</a></li>
+    <li><a href="#posts">Postagens</a></li>
+    <li><a href="#likes">Curtidas</a></li>
+  </ol>
 
-    <p>
-      É uma API RESTful bem simples que eu criei para que meus alunos pudessem praticar React Native na disciplina Desenvolvimento Mobile (IFBA). Minha intenção era dar a eles uma API suficiente para que pudessem fazer requisições e produzir assim um front-end, servindo de objeto de avaliação da disciplina.
-    </p>
+  <p>
+    Em cada tópico da documentação será exibido um exemplo do corpo da requisição e da resposta. As chaves JSON em cada
+    exemplo são auto-explicativas.
+  </p>
 
-    <!-- COMO ACESSAR A API -->
+  <p><b>O que é a API Papacapim?</b></p>
 
-    <h2 id="howto">Como acessar a API</h2>
+  <p>
+    É uma API RESTful bem simples que eu criei para que meus alunos pudessem praticar Flutter na disciplina
+    Desenvolvimento Mobile (IFBA). Minha intenção era dar a eles uma API suficiente para que pudessem fazer requisições
+    e produzir assim um front-end, servindo de objeto de avaliação da disciplina.
+  </p>
 
-    <p>
-      A API Papacapim é aberta e qualquer um pode acessá-la para praticar a criação de front-ends com consumo de APIs através da URL <span class="code">https://api.papacapim.just.pro.br</span>.
-    </p>
+  <!-- COMO ACESSAR A API -->
 
-    <p><a href="#top">Retornar ao início</a></p>
+  <h2 id="howto">Como acessar a API</h2>
 
-    <!-- AUTENTICAÇÃO -->
+  <p>
+    A API Papacapim é aberta e qualquer um pode acessá-la para praticar a criação de front-ends com consumo de APIs
+    através da URL <span class="code">https://api.papacapim.just.pro.br</span>.
+  </p>
 
-    <h2 id="auth">Autenticação</h2>
+  <p><a href="#top">Retornar ao início</a></p>
 
-    <p>
-      Todos os endpoints, com exceção do endpoint para criação de um novo usuário, requerem autenticação. Desta forma, apenas usuários autenticados poderão acessar a API e todos os objetos que forem criados serão associados ao usuário autenticado.
-    </p>
+  <!-- AUTENTICAÇÃO -->
 
-    <p>
-      A autenticação no Papacapim funciona através de um token de sessão. Este token deverá ser enviado a cada requisição no cabeçalho HTTP através da chave <span class="code">x-session-token</span>. Para obter um token basta criar uma nova sessão usando seu usuário e senha (caso não tenha usuário, crie antes usando o endpoint <a href="#users_create">Criar usuário</a>). Para encerrar a sessão (uma espécie de log-out), basta deletar a sessão previamente criada.
-    </p>
+  <h2 id="auth">Autenticação</h2>
 
-    <!-- Nova sessão -->
+  <p>
+    Todos os endpoints, com exceção do endpoint para criação de um novo usuário, requerem autenticação. Desta forma,
+    apenas usuários autenticados poderão acessar a API e todos os objetos que forem criados serão associados ao usuário
+    autenticado.
+  </p>
 
-    <h3>Nova sessão: <span class="code">POST /sessions</span></h3>
+  <p>
+    A autenticação no Papacapim funciona através de um token de sessão. Este token deverá ser enviado a cada requisição
+    no cabeçalho HTTP através da chave <span class="code">x-session-token</span>. Para obter um token basta criar uma
+    nova sessão usando seu usuário e senha (caso não tenha usuário, crie antes usando o endpoint <a
+      href="#users_create">Criar usuário</a>). Para encerrar a sessão (uma espécie de log-out), basta deletar a sessão
+    previamente criada.
+  </p>
 
-    <h4>Corpo</h4>
+  <!-- Nova sessão -->
 
-    <p>Objeto JSON contendo login e senha.</p>
+  <h3>Nova sessão: <span class="code">POST /sessions</span></h3>
 
-    <pre><code>
-      {
-        "login": "frankson",
-        "password": "123mudar"
-      }
-    </code></pre>
+  <h4>Corpo</h4>
 
-    <h4>Resposta: 200</h4>
+  <p>Objeto JSON contendo login e senha.</p>
 
-    <p>Objeto JSON da sessão criada. Armazene o valor de <span class="code">token</span> para usar nas próximas requisições.</p>
+  <pre><code>
+    {
+      "login": "frankson",
+      "password": "123mudar"
+    }
+  </code></pre>
 
-    <pre><code>
-      {
-        "id": 1,
-        "user_login": "frankson",
-        "token": "12835982-bc61-4f48-9561-ec1471969c6e",
-        "ip": "::1",
-        "created_at": "2024-08-03T12:38:19.997Z",
-        "updated_at": "2024-08-03T12:38:19.997Z"
-      }
-    </code></pre>
+  <h4>Resposta: 200</h4>
 
-    <!-- Encerrar sessão -->
+  <p>Objeto JSON da sessão criada. Armazene o valor de <span class="code">token</span> para usar nas próximas
+    requisições.</p>
 
-    <h3>Encerrar sessão: <span class="code">DELETE /sessions/1</span></h3>
+  <pre><code>
+    {
+      "user_login": "frankson",
+      "token": "12835982-bc61-4f48-9561-ec1471969c6e",
+      "ip": "::1",
+    }
+  </code></pre>
 
-    <h4>Resposta: 204</h4>
+  <!-- Encerrar sessão -->
 
-    <p>Sem conteúdo.</p>
+  <h3>Encerrar sessão: <span class="code">DELETE /sessions/1</span></h3>
 
-    <p><a href="#top">Retornar ao início</a></p>
+  <h4>Resposta: 204</h4>
 
-    <!-- USUÁRIOS -->
+  <p>Sem conteúdo.</p>
 
-    <h2 id="users">Usuários</h2>
+  <p><a href="#top">Retornar ao início</a></p>
 
-    <p>
-      Nos endpoints a seguir trataremos da manipulação de usuários da plataforma. A criação de novos usuários é livre e pode ser feita por qualquer um (este é o único endpoint que não precisa de autenticação). Após criado um usuário você poderá autenticá-lo e acessar os outros endpoints.
-    </p>
+  <!-- USUÁRIOS -->
 
-    <!-- Criar usuário -->
+  <h2 id="users">Usuários</h2>
 
-    <h3 id="users_create">Criar usuário: <span class="code">POST /users</span></h3>
+  <p>
+    Nos endpoints a seguir trataremos da manipulação de usuários da plataforma. A criação de novos usuários é livre e
+    pode ser feita por qualquer um (este é o único endpoint que não precisa de autenticação). Após criado um usuário
+    você poderá autenticá-lo e acessar os outros endpoints.
+  </p>
 
-    <h4>Corpo</h4>
+  <!-- Criar usuário -->
 
-    <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário.</p>
+  <h3 id="users_create">Criar usuário: <span class="code">POST /users</span></h3>
 
-    <pre><code>
-      {
-        "user": {
-          "login": "frankson",
-          "name": "Frankson Barreto",
-          "password": "123mudar",
-          "password_confirmation": "123mudar"
-        }
-      }
-    </code></pre>
+  <h4>Corpo</h4>
 
-    <h4>Resposta: 201</h4>
+  <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário.</p>
 
-    <p>O corpo da resposta conterá um JSON do usuário criado.</p>
-
-    <pre><code>
-      {
-        "id": 3,
+  <pre><code>
+    {
+      "user": {
         "login": "frankson",
         "name": "Frankson Barreto",
-        "created_at": "2024-08-03T12:04:12.460Z",
-        "updated_at": "2024-08-03T12:04:12.460Z"
+        "password": "123mudar",
+        "password_confirmation": "123mudar"
       }
-    </code></pre>
+    }
+  </code></pre>
 
-    <!-- Alterar usuário -->
+  <h4>Resposta: 201</h4>
 
-    <h3>Alterar usuário: <span class="code">PATCH /users/1</span></h3>
+  <p>O corpo da resposta conterá um JSON do usuário criado.</p>
 
-    <h4>Corpo</h4>
+  <pre><code>
+    {
+      "login": "frankson",
+      "name": "Frankson Barreto",
+      "created_at": "2024-08-03T12:04:12.460Z",
+    }
+  </code></pre>
 
-    <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário. Neste caso os campos são todos opcionais. Por exemplo: se deseja mudar apenas o login, basta enviar <span class="code">login</span>; se deseja apenas alterar a senha, basta enviar <span class="code">password</span> e <span class="code">password_confirmation</span>. É possível enviar tudo para alterar todos os dados caso queira.</p>
+  <!-- Alterar usuário -->
 
-    <p><b>Por razões de segurança, todas as sessões ativas serão excluídas ao alterar a senha e será preciso criar uma nova sessão para continuar acessando a API.</b></p>
+  <h3>Alterar usuário: <span class="code">PATCH /users/1</span></h3>
 
-    <pre><code>
-      {
-        "user": {
-          "login": "franks",
-          "name": "Frankson Batista",
-          "password": "senhanova",
-          "password_confirmation": "senhanova"
-        }
-      }
-    </code></pre>
+  <h4>Corpo</h4>
 
-    <h4>Resposta: 201</h4>
+  <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário. Neste caso os campos são todos
+    opcionais. Por exemplo: se deseja mudar apenas o login, basta enviar <span class="code">login</span>; se deseja
+    apenas alterar a senha, basta enviar <span class="code">password</span> e <span
+      class="code">password_confirmation</span>. É possível enviar tudo para alterar todos os dados caso queira.</p>
 
-    <p>O corpo da resposta conterá um JSON com os novos dados do usuário.</p>
+  <p><b>Por razões de segurança, todas as sessões ativas serão excluídas ao alterar a senha e será preciso criar uma
+      nova sessão para continuar acessando a API.</b></p>
 
-    <pre><code>
-      {
-        "id": 3,
+  <pre><code>
+    {
+      "user": {
         "login": "franks",
         "name": "Frankson Batista",
-        "created_at": "2024-08-03T12:04:12.460Z",
-        "updated_at": "2024-08-03T13:11:48.310Z"
+        "password": "senhanova",
+        "password_confirmation": "senhanova"
       }
-    </code></pre>
+    }
+  </code></pre>
 
-    <!-- Listar usuários -->
+  <h4>Resposta: 201</h4>
 
-    <h3>Listar usuários: <span class="code">GET /users</span></h3>
+  <p>O corpo da resposta conterá um JSON com os novos dados do usuário.</p>
 
-    <h4>Parâmetros de URL</h4>
+  <pre><code>
+    {
+      "login": "franks",
+      "name": "Frankson Batista",
+    }
+  </code></pre>
 
-    <ul>
-      <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos os usuários sejam listados ao mesmo tempo.</li>
-      <li><span class="code">search</span>: (opcional, string) Busca usuários pelo nome. Se omitido, retorna todos os usuários cadastrados.</li>
-    </ul>
+  <!-- Listar usuários -->
 
-    <h4>Resposta: 200</h4>
+  <h3>Listar usuários: <span class="code">GET /users</span></h3>
 
-    <p>O corpo da resposta conterá um JSON com a lista de usuários.</p>
+  <h4>Parâmetros de URL</h4>
 
-    <pre><code>
-      [
-        {
-          "id": 1,
-          "login": "just",
-          "name": "J. P. Just",
-          "created_at": "2024-07-28T16:27:42.869Z",
-          "updated_at": "2024-07-28T16:27:42.869Z"
-        },
-        {
-          "id": 2,
-          "login": "teste",
-          "name": "Testador",
-          "created_at": "2024-07-28T16:28:20.995Z",
-          "updated_at": "2024-07-28T16:28:20.995Z"
-        },
-        {
-          "id": 3,
-          "login": "frankson",
-          "name": "Frankson Barreto",
-          "created_at": "2024-08-03T12:04:12.460Z",
-          "updated_at": "2024-08-03T12:04:12.460Z"
-        }
-      ]
-    </code></pre>
+  <ul>
+    <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos os
+      usuários sejam listados ao mesmo tempo.</li>
+    <li><span class="code">search</span>: (opcional, string) Busca usuários pelo nome. Se omitido, retorna todos os
+      usuários cadastrados.</li>
+  </ul>
 
-    <!-- Obter usuário específico -->
+  <h4>Resposta: 200</h4>
 
-    <h3>Obter usuário específico: <span class="code">GET /users/{login}</span></h3>
+  <p>O corpo da resposta conterá um JSON com a lista de usuários.</p>
 
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">{login}</span>: (string) Login do usuário que deseja obter.</li>
-    </ul>
-
-    <h4>Resposta: 200</h4>
-
-    <p>O corpo da resposta conterá um JSON com os dados do usuário.</p>
-
-    <pre><code>
+  <pre><code>
+    [
       {
-        "id": 1,
         "login": "just",
         "name": "J. P. Just",
-        "created_at": "2024-07-28T16:27:42.869Z",
-        "updated_at": "2024-07-28T16:27:42.869Z"
+      },
+      {
+        "login": "teste",
+        "name": "Testador",
+      },
+      {
+        "login": "frankson",
+        "name": "Frankson Barreto",
       }
-    </code></pre>
+    ]
+  </code></pre>
 
-    <!-- Excluir usuário -->
+  <!-- Obter usuário específico -->
 
-    <h3>Excluir usuário: <span class="code">DELETE /users/1</span></h3>
+  <h3>Obter usuário específico: <span class="code">GET /users/{login}</span></h3>
 
-    <h4>Resposta: 204</h4>
+  <h4>Parâmetros de URL</h4>
 
-    <p>Sem conteúdo.</p>
+  <ul>
+    <li><span class="code">{login}</span>: (string) Login do usuário que deseja obter.</li>
+  </ul>
 
-    <p><a href="#top">Retornar ao início</a></p>
+  <h4>Resposta: 200</h4>
 
-    <!-- SEGUIDORES -->
+  <p>O corpo da resposta conterá um JSON com os dados do usuário.</p>
 
-    <h2 id="followers">Seguidores</h2>
+  <pre><code>
+    {
+      "login": "just",
+      "name": "J. P. Just",
+    }
+  </code></pre>
 
-    <p>
-      Os endpoints de seguidores permitirão que um usuário siga alguém ou liste os seguidores de alguém.
-    </p>
+  <!-- Excluir usuário -->
 
-    <!-- Seguir alguém -->
+  <h3>Excluir usuário: <span class="code">DELETE /users/1</span></h3>
 
-    <h3>Seguir alguém: <span class="code">POST /users/{login}/followers</span></h3>
+  <h4>Resposta: 204</h4>
 
-    <h4>Parâmetros de URL</h4>
+  <p>Sem conteúdo.</p>
 
-    <ul>
-      <li><span class="code">{login}</span>: (string): Login do usuário que você deseja seguir.</li>
-    </ul>
+  <p><a href="#top">Retornar ao início</a></p>
 
-    <h4>Resposta: 201</h4>
+  <!-- SEGUIDORES -->
 
-    <p>O corpo da resposta conterá um JSON com os dados da relação de seguidor criada.</p>
+  <h2 id="followers">Seguidores</h2>
 
-    <pre><code>
+  <p>
+    Os endpoints de seguidores permitirão que um usuário siga alguém ou liste os seguidores de alguém.
+  </p>
+
+  <!-- Seguir alguém -->
+
+  <h3>Seguir alguém: <span class="code">POST /users/{login}/followers</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">{login}</span>: (string): Login do usuário que você deseja seguir.</li>
+  </ul>
+
+  <h4>Resposta: 201</h4>
+
+  <p>O corpo da resposta conterá um JSON com os dados da relação de seguidor criada.</p>
+
+  <pre><code>
+    {
+      "follower_login": "frankson",
+    }
+  </code></pre>
+
+  <!-- Listar seguidores -->
+
+  <h3>Listar seguidores: <span class="code">GET /users/{login}/followers</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">{login}</span>: (string) Login do usuário o qual você quer listar os seguidores.</li>
+  </ul>
+
+  <h4>Resposta: 200</h4>
+
+  <p>O corpo da resposta conterá um JSON com a lista de seguidores deste usuário.</p>
+
+  <pre><code>
+    [
+      {
+        "follower_login": "just",
+      },
+      {
+        "follower_login": "frankson",
+      }
+    ]
+  </code></pre>
+
+  <!-- Deixar de seguir -->
+
+  <h3>Deixar de seguir: <span class="code">DELETE /users/{login}/followers/1</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">{login}</span>: (string) Login do usuário o qual você quer deixar de seguir.</li>
+  </ul>
+
+  <h4>Resposta: 204</h4>
+
+  <p>Sem conteúdo.</p>
+
+  <p><a href="#top">Retornar ao início</a></p>
+
+  <!-- POSTAGENS -->
+
+  <h2 id="posts">Postagens</h2>
+
+  <p>
+    Nos endpoints a seguir trataremos da manipulação de postagens, possibilitando a criação de novas postagens,
+    respostas a postagens de outros usuários e exclusão de postagens.
+  </p>
+
+  <!-- Nova postagem -->
+
+  <h3>Nova postagem: <span class="code">POST /posts</span></h3>
+
+  <h4>Corpo</h4>
+
+  <p>Um objeto JSON contendo a postagem.</p>
+
+  <pre><code>
+    {
+      "post": {
+        "message": "Acabei de entrar no Papacapim!"
+      }
+    }
+  </code></pre>
+
+  <h4>Resposta: 201</h4>
+
+  <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
+
+  <pre><code>
+    {
+      "id": 7,
+      "user_login": "frankson",
+      "post_id": null,
+      "message": "Acabei de entrar no Papacapim!",
+      "created_at": "2024-08-03T13:34:18.103Z",
+    }
+  </code></pre>
+
+  <!-- Responder uma postagem -->
+
+  <h3>Responder uma postagem: <span class="code">POST /posts/{id}/replies</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">{id}</span>: (inteiro) ID da postagem que será respondida.</li>
+  </ul>
+
+  <h4>Corpo</h4>
+
+  <p>Um objeto JSON contendo a postagem.</p>
+
+  <pre><code>
+    {
+      "reply": {
+        "message": "Também entrei no Papacapim essa semana. É muito massa!",
+      }
+    }
+  </code></pre>
+
+  <h4>Resposta: 201</h4>
+
+  <p>
+    O corpo da resposta conterá um JSON com a postagem criada. Na resposta o campo <span class="code">post_id</span>
+    refere-se ao ID do post que está sendo respondido.
+  </p>
+
+  <pre><code>
+    {
+      "id": 8,
+      "user_login": "just",
+      "post_id": 7,
+      "message": "Também entrei no Papacapim essa semana. É muito massa!",
+      "created_at": "2024-08-03T13:36:56.977Z",
+    }
+  </code></pre>
+
+  <!-- Listar postagens e feed -->
+
+  <h3>Listar postagens e feed: <span class="code">GET /posts</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as
+      postagens sejam listadas ao mesmo tempo.</li>
+    <li><span class="code">feed</span>: (opcional, inteiro) Se for <span class="code">1</span> lista apenas postagens
+      feitas pelos usuários que você segue.</li>
+    <li><span class="code">search</span>: (opcional, string) Busca mensagens com algum do(s) termo(s) especificado(s).
+    </li>
+  </ul>
+
+  <h4>Resposta: 200</h4>
+
+  <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
+
+  <pre><code>
+    [
+      {
+        "id": 2,
+        "user_login": "just",
+        "post_id": null,
+        "message": "Vou passar a usar esta rede.",
+        "created_at": "2024-08-01T14:30:33.000Z",
+        "likes": [
+          {
+            "user_login": "frankson"
+          }
+        ]
+      },
       {
         "id": 6,
-        "follower_login": "frankson",
-        "followed_login": "just",
-        "created_at": "2024-08-03T13:24:00.637Z",
-        "updated_at": "2024-08-03T13:24:00.637Z"
-      }
-    </code></pre>
-
-    <!-- Listar seguidores -->
-
-    <h3>Listar seguidores: <span class="code">GET /users/{login}/followers</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">{login}</span>: (string) Login do usuário o qual você quer listar os seguidores.</li>
-    </ul>
-
-    <h4>Resposta: 200</h4>
-
-    <p>O corpo da resposta conterá um JSON com a lista de seguidores deste usuário.</p>
-
-    <pre><code>
-      [
-        {
-          "id": 1,
-          "login": "just",
-          "name": "J. P. Just",
-          "created_at": "2024-07-28T16:27:42.869Z",
-          "updated_at": "2024-07-28T16:27:42.869Z"
-        },
-        {
-          "id": 3,
-          "login": "frankson",
-          "name": "Frankson Barreto",
-          "created_at": "2024-08-03T12:04:12.460Z",
-          "updated_at": "2024-08-03T12:04:12.460Z"
-        }
-      ]
-    </code></pre>
-
-    <!-- Deixar de seguir -->
-
-    <h3>Deixar de seguir: <span class="code">DELETE /users/{login}/followers/1</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">{login}</span>: (string) Login do usuário o qual você quer deixar de seguir.</li>
-    </ul>
-
-    <h4>Resposta: 204</h4>
-
-    <p>Sem conteúdo.</p>
-
-    <p><a href="#top">Retornar ao início</a></p>
-
-    <!-- POSTAGENS -->
-
-    <h2 id="posts">Postagens</h2>
-
-    <p>
-      Nos endpoints a seguir trataremos da manipulação de postagens, possibilitando a criação de novas postagens, respostas a postagens de outros usuários e exclusão de postagens.
-    </p>
-
-    <!-- Nova postagem -->
-
-    <h3>Nova postagem: <span class="code">POST /posts</span></h3>
-
-    <h4>Corpo</h4>
-
-    <p>Um objeto JSON contendo a postagem.</p>
-
-    <pre><code>
-      {
-        "post": {
-          "message": "Acabei de entrar no Papacapim!"
-        }
-      }
-    </code></pre>
-
-    <h4>Resposta: 201</h4>
-
-    <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
-
-    <pre><code>
+        "user_login": "gustavo",
+        "post_id": 2,
+        "message": "Esta rede é muito massa!",
+        "created_at": "2024-08-01T14:31:05.000Z",
+        "likes": []
+      },
       {
         "id": 7,
         "user_login": "frankson",
         "post_id": null,
         "message": "Acabei de entrar no Papacapim!",
         "created_at": "2024-08-03T13:34:18.103Z",
-        "updated_at": "2024-08-03T13:34:18.103Z"
-      }
-    </code></pre>
-
-    <!-- Responder uma postagem -->
-
-    <h3>Responder uma postagem: <span class="code">POST /posts/{id}/replies</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">{id}</span>: (inteiro) ID da postagem que será respondida.</li>
-    </ul>
-
-    <h4>Corpo</h4>
-
-    <p>Um objeto JSON contendo a postagem.</p>
-
-    <pre><code>
-      {
-        "reply": {
-          "message": "Também entrei no Papacapim essa semana. É muito massa!",
-        }
-      }
-    </code></pre>
-
-    <h4>Resposta: 201</h4>
-
-    <p>O corpo da resposta conterá um JSON com a postagem criada.</p>
-
-    <pre><code>
+        "likes": []
+      },
       {
         "id": 8,
         "user_login": "just",
         "post_id": 7,
         "message": "Também entrei no Papacapim essa semana. É muito massa!",
         "created_at": "2024-08-03T13:36:56.977Z",
-        "updated_at": "2024-08-03T13:36:56.977Z"
+        "likes": []
       }
-    </code></pre>
+    ]
+  </code></pre>
 
-    <!-- Listar postagens e feed -->
+  <!-- Listar postagens do usuário -->
 
-    <h3>Listar postagens e feed: <span class="code">GET /posts</span></h3>
+  <h3>Listar postagens do usuário: <span class="code">GET /users/{login}/posts</span></h3>
 
-    <h4>Parâmetros de URL</h4>
+  <h4>Parâmetros de URL</h4>
 
-    <ul>
-      <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as postagens sejam listadas ao mesmo tempo.</li>
-      <li><span class="code">feed</span>: (opcional, inteiro) Se for <span class="code">1</span> lista apenas postagens feitas pelos usuários que você segue.</li>
-      <li><span class="code">search</span>: (opcional, string) Busca mensagens com algum do(s) termo(s) especificado(s).</li>
-    </ul>
+  <ul>
+    <li><span class="code">{login}</span>: (string) Determina qual usuário autor das postagens a serem listadas.</li>
+    <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as
+      postagens sejam listadas ao mesmo tempo.</li>
+  </ul>
 
-    <h4>Resposta: 200</h4>
+  <h4>Resposta: 200</h4>
 
-    <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
+  <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
 
-    <pre><code>
-      [
-        {
-          "id": 2,
-          "user_login": "just",
-          "post_id": null,
-          "message": "Vou passar a usar esta rede.",
-          "created_at": "2024-08-01T14:30:33.000Z",
-          "updated_at": "2024-08-01T14:30:33.000Z"
-        },
-        {
-          "id": 6,
-          "user_login": "gustavo",
-          "post_id": 2,
-          "message": "Esta rede é muito massa!",
-          "created_at": "2024-08-01T14:31:05.000Z",
-          "updated_at": "2024-08-01T14:31:05.000Z"
-        },
-        {
-          "id": 7,
-          "user_login": "frankson",
-          "post_id": null,
-          "message": "Acabei de entrar no Papacapim!",
-          "created_at": "2024-08-03T13:34:18.103Z",
-          "updated_at": "2024-08-03T13:34:18.103Z"
-        },
-        {
-          "id": 8,
-          "user_login": "just",
-          "post_id": 7,
-          "message": "Também entrei no Papacapim essa semana. É muito massa!",
-          "created_at": "2024-08-03T13:36:56.977Z",
-          "updated_at": "2024-08-03T13:36:56.977Z"
-        }
-      ]
-    </code></pre>
-
-    <!-- Listar postagens do usuário -->
-
-    <h3>Listar postagens do usuário: <span class="code">GET /users/{login}/posts</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">{login}</span>: (string) Determina qual usuário autor das postagens a serem listadas.</li>
-      <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as postagens sejam listadas ao mesmo tempo.</li>
-    </ul>
-
-    <h4>Resposta: 200</h4>
-
-    <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
-
-    <pre><code>
-      [
-        {
-          "id": 2,
-          "user_login": "just",
-          "post_id": null,
-          "message": "Vou passar a usar esta rede.",
-          "created_at": "2024-08-01T14:30:33.000Z",
-          "updated_at": "2024-08-01T14:30:33.000Z"
-        },
-        {
-          "id": 8,
-          "user_login": "just",
-          "post_id": 7,
-          "message": "Também entrei no Papacapim essa semana. É muito massa!",
-          "created_at": "2024-08-03T13:36:56.977Z",
-          "updated_at": "2024-08-03T13:36:56.977Z"
-        }
-      ]
-    </code></pre>
-
-    <!-- Listar respostas -->
-
-    <h3>Listar respostas: <span class="code">GET /posts/{id}/replies</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">{id}</span>: (inteiro) Determina o ID da postagem da qual serão listadas as respostas.</li>
-      <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as postagens sejam listadas ao mesmo tempo.</li>
-    </ul>
-
-    <h4>Resposta: 200</h4>
-
-    <p>O corpo da resposta conterá um JSON com a lista de respostas.</p>
-
-    <pre><code>
-      [
-        {
-          "id": 6,
-          "user_login": "gustavo",
-          "post_id": 2,
-          "message": "Esta rede é muito massa!",
-          "created_at": "2024-08-01T14:31:05.000Z",
-          "updated_at": "2024-08-01T14:31:05.000Z"
-        },
-      ]
-    </code></pre>
-
-    <!-- Excluir postagem -->
-
-    <h3>Excluir postagem: <span class="code">DELETE /posts/{id}</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">id</span>: (inteiro) ID da postagem que deseja excluir.</li>
-    </ul>
-
-    <h4>Resposta: 204</h4>
-
-    <p>Sem conteúdo.</p>
-
-    <p><a href="#top">Retornar ao início</a></p>
-
-    <!-- CURTIDAS -->
-
-    <h2 id="likes">Curtidas</h2>
-
-    <p>
-      Nos endpoints a seguir trataremos da manipulação de curtidas em uma postagem. Eles permitirão curtir uma postagem, descurtir e visualizar curtidas.
-    </p>
-
-    <!-- Curtir postagem -->
-
-    <h3>Curtir postagem: <span class="code">POST /posts/{id}/likes</span></h3>
-
-    <h4>Parâmetros de URL</h4>
-
-    <ul>
-      <li><span class="code">id</span>: (inteiro) ID da postagem que deseja curtir.</li>
-    </ul>
-
-    <h4>Resposta: 201</h4>
-
-    <p>O corpo da resposta conterá um JSON com dados da curtida.</p>
-
-    <pre><code>
+  <pre><code>
+    [
       {
         "id": 2,
-        "user_login": "frankson",
+        "user_login": "just",
+        "post_id": null,
+        "message": "Vou passar a usar esta rede.",
+        "created_at": "2024-08-01T14:30:33.000Z",
+        "likes": [],
+      },
+      {
+        "id": 8,
+        "user_login": "just",
         "post_id": 7,
-        "created_at": "2024-08-03T13:49:23.226Z",
-        "updated_at": "2024-08-03T13:49:23.226Z"
+        "message": "Também entrei no Papacapim essa semana. É muito massa!",
+        "created_at": "2024-08-03T13:36:56.977Z",
+        "likes": [],
       }
-    </code></pre>
+    ]
+  </code></pre>
 
-    <!-- Listar curtidas -->
+  <!-- Listar respostas -->
 
-    <h3>Listar curtidas: <span class="code">GET /posts/{id}/likes</span></h3>
+  <h3>Listar respostas: <span class="code">GET /posts/{id}/replies</span></h3>
 
-    <h4>Parâmetros de URL</h4>
+  <h4>Parâmetros de URL</h4>
 
-    <ul>
-      <li><span class="code">id</span>: (inteiro) ID da postagem que deseja visualizar curtidas.</li>
-    </ul>
+  <ul>
+    <li><span class="code">{id}</span>: (inteiro) Determina o ID da postagem da qual serão listadas as respostas.</li>
+    <li><span class="code">page</span>: (opcional, inteiro) Determina a página da listagem para evitar que todos as
+      postagens sejam listadas ao mesmo tempo.</li>
+  </ul>
 
-    <h4>Resposta: 200</h4>
+  <h4>Resposta: 200</h4>
 
-    <p>O corpo da resposta conterá um JSON com a lista de curtidas.</p>
+  <p>O corpo da resposta conterá um JSON com a lista de respostas.</p>
 
-    <pre><code>
-      [
-        {
-          "id": 2,
-          "user_login": "just",
-          "post_id": 1,
-          "created_at": "2024-08-03T13:49:23.226Z",
-          "updated_at": "2024-08-03T13:49:23.226Z"
-        },
-        {
-          "id": 3,
-          "user_login": "frankson",
-          "post_id": 1,
-          "created_at": "2024-08-03T10:51:44.000Z",
-          "updated_at": "2024-08-03T10:51:44.000Z"
-        }
-      ]
-    </code></pre>
+  <pre><code>
+    [
+      {
+        "id": 6,
+        "user_login": "gustavo",
+        "post_id": 2,
+        "message": "Esta rede é muito massa!",
+        "created_at": "2024-08-01T14:31:05.000Z",
+        "likes": [],
+      },
+    ]
+  </code></pre>
 
-    <!-- Remover curtida -->
+  <!-- Excluir postagem -->
 
-    <h3>Remover curtida: <span class="code">DELETE /posts/{id}/likes/1</span></h3>
+  <h3>Excluir postagem: <span class="code">DELETE /posts/{id}</span></h3>
 
-    <h4>Parâmetros de URL</h4>
+  <h4>Parâmetros de URL</h4>
 
-    <ul>
-      <li><span class="code">id</span>: (inteiro) ID da postagem que deseja descurtir.</li>
-    </ul>
+  <ul>
+    <li><span class="code">id</span>: (inteiro) ID da postagem que deseja excluir.</li>
+  </ul>
 
-    <h4>Resposta: 204</h4>
+  <h4>Resposta: 204</h4>
 
-    <p>Sem conteúdo.</p>
+  <p>Sem conteúdo.</p>
 
-    <p><a href="#top">Retornar ao início</a></p>
+  <p><a href="#top">Retornar ao início</a></p>
 
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- CURTIDAS -->
 
-    <!-- highlight.js -->
-    <script>hljs.highlightAll();</script>
-  </body>
+  <h2 id="likes">Curtidas</h2>
+
+  <p>
+    Nos endpoints a seguir trataremos da manipulação de curtidas em uma postagem. Eles permitirão curtir uma postagem,
+    descurtir e visualizar curtidas.
+  </p>
+
+  <!-- Curtir postagem -->
+
+  <h3>Curtir postagem: <span class="code">POST /posts/{id}/likes</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">id</span>: (inteiro) ID da postagem que deseja curtir.</li>
+  </ul>
+
+  <h4>Resposta: 201</h4>
+
+  <p>O corpo da resposta conterá um JSON com dados da curtida.</p>
+
+  <pre><code>
+    {
+      "user_login": "frankson",
+    }
+  </code></pre>
+
+  <!-- Listar curtidas -->
+
+  <h3>Listar curtidas: <span class="code">GET /posts/{id}/likes</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">id</span>: (inteiro) ID da postagem que deseja visualizar curtidas.</li>
+  </ul>
+
+  <h4>Resposta: 200</h4>
+
+  <p>O corpo da resposta conterá um JSON com a lista de curtidas.</p>
+
+  <pre><code>
+    [
+      {
+        "user_login": "just",
+      },
+      {
+        "user_login": "frankson",
+      }
+    ]
+  </code></pre>
+
+  <!-- Remover curtida -->
+
+  <h3>Remover curtida: <span class="code">DELETE /posts/{id}/likes/1</span></h3>
+
+  <h4>Parâmetros de URL</h4>
+
+  <ul>
+    <li><span class="code">id</span>: (inteiro) ID da postagem que deseja descurtir.</li>
+  </ul>
+
+  <h4>Resposta: 204</h4>
+
+  <p>Sem conteúdo.</p>
+
+  <p><a href="#top">Retornar ao início</a></p>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- highlight.js -->
+  <script>hljs.highlightAll();</script>
+</body>
+
 </html>
