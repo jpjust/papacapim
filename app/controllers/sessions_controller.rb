@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def index
     @sessions = current_user.sessions
 
-    render json: @sessions
+    render json: @sessions, only: [:user_login, :ip]
   end
 
   # POST /sessions
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
         user_id: @user.id,
         ip: request.remote_ip,
       })
-      render json: @session
+      render json: @session, only: [:user_login, :token, :ip]
     else
       render json: {}, status: 401
     end

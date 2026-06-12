@@ -6,7 +6,7 @@ class LikesController < ApplicationController
 
   # GET /posts/:post_id/likes
   def index
-    render json: @post.likes, :except => [:user_id]
+    render json: @post.likes, only: [:user_login]
   end
 
   # POST /posts/:post_id/likes
@@ -15,7 +15,7 @@ class LikesController < ApplicationController
     @like.user_id = current_user.id
 
     if @like.save
-      render json: @like, :except => [:user_id], status: :created, location: post_like_url(@post.id, @like.id)
+      render json: @like, only: [:user_login], status: :created, location: post_like_url(@post.id, @like.id)
     else
       render json: @like.errors, status: :unprocessable_entity
     end

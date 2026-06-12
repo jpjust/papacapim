@@ -7,7 +7,9 @@ class RepliesController < ApplicationController
   def index
     page = params[:page].to_i || 0
     offset = ENV['POSTS_FEED_PAGELIMIT'] * page
-    render json: @post.replies.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset), :except => [:user_id]
+    render json: @post.replies.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset),
+           only: [:user_login, :message, :created_at, :post_id],
+           include: [likes: {only: [:user_login]}]
   end
 
   # POST /posts/:post_id/replies
@@ -17,7 +19,7 @@ class RepliesController < ApplicationController
     @reply.user_id = current_user.id
 
     if @reply.save
-      render json: @reply, :except => [:user_id], status: :created, location: @reply
+      render json: @reply, only: [:user_login, :message, :created_at, :post_id], status: :created, location: @reply
     else
       render json: @reply.errors, status: :unprocessable_entity
     end

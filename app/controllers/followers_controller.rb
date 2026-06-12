@@ -6,7 +6,7 @@ class FollowersController < ApplicationController
 
   # GET /users/:user_id/followers
   def index
-    render json: @user.followers, :except => [:id, :password_digest]
+    render json: @user.followers, only: [:follower_login]
   end
 
   # POST /users/:user_id/followers
@@ -14,7 +14,7 @@ class FollowersController < ApplicationController
     @follower = Follower.new(followed_id: @user.id, follower_id: current_user.id)
 
     if @follower.save
-      render json: @follower, :except => [:follower_id, :followed_id], status: :created, location: user_follower_url(@user.id, @follower.id)
+      render json: @follower, only: [:follower_login], status: :created, location: user_follower_url(@user.id, @follower.id)
     else
       render json: @follower.errors, status: :unprocessable_entity
     end

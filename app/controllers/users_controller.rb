@@ -14,12 +14,12 @@ class UsersController < ApplicationController
     search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
     @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
-    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), except: [:id, :password_digest]
+    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), only: [:login, :name]
   end
 
   # GET /users/login
   def show
-    render json: @user, except: [:id, :password_digest]
+    render json: @user, only: [:login, :name]
   end
 
   # POST /users
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, except: [:id, :password_digest], status: :created, location: @user
+      render json: @user, only: [:login, :name, :created_at], status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       Session.where(user_id: @user.id).destroy_all if @user.password.present?
-      render json: @user, except: [:id, :password_digest]
+      render json: @user, only: [:login, :name]
     else
       render json: @user.errors, status: :unprocessable_entity
     end

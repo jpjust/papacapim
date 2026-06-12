@@ -18,12 +18,19 @@ class PostsController < ApplicationController
       @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query) 
     end
 
-    render json: @posts.limit(ENV['POSTS_FEED_PAGELIMIT'].to_i).offset(offset), :except => [:user_id]
+    render json: @posts.limit(ENV['POSTS_FEED_PAGELIMIT'].to_i).offset(offset),
+           only: [:id, :user_login, :message, :created_at, :post_id],
+           include: [likes: {only: [:user_login]}]
   end
 
   # GET /posts/1
   def show
-    render json: @post, :include => [:replies, :likes], :except => [:user_id]
+    render json: @post,
+           only: [:id, :user_login, :message, :created_at, :post_id],
+           include: [
+             replies: {only: [:user_login, :message, :created_at] },
+             likes: {only: [:user_login]}
+           ]
   end
 
   # POST /posts
@@ -32,7 +39,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      render json: @post, :except => [:user_id], status: :created, location: @post
+      render json: @post, only: [:id, :user_login, :message, :created_at, :post_id], status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity
     end
