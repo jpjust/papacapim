@@ -13,4 +13,14 @@ class User < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  attribute :profile_image
+
+  def img_file
+    File.join(Rails.root, 'public', 'image', 'profile', "#{self.login.strip}.webp")
+  end
+
+  def profile_image
+    File.exist?(self.img_file) ? "https://api.papacapim.just.pro.br/image/profile/#{self.login.strip}.webp" : nil
+  end
+
 end

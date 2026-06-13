@@ -161,13 +161,22 @@
 
   <h4>Corpo</h4>
 
-  <p>Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário. Neste caso os campos são todos
+  <p>
+    Um objeto JSON contendo o login, nome, senha e confirmação de senha do novo usuário. Neste caso os campos são todos
     opcionais. Por exemplo: se deseja mudar apenas o login, basta enviar <span class="code">login</span>; se deseja
     apenas alterar a senha, basta enviar <span class="code">password</span> e <span
-      class="code">password_confirmation</span>. É possível enviar tudo para alterar todos os dados caso queira.</p>
+      class="code">password_confirmation</span>. É possível enviar tudo para alterar todos os dados caso queira.
+  </p>
 
   <p><b>Por razões de segurança, todas as sessões ativas serão excluídas ao alterar a senha e será preciso criar uma
       nova sessão para continuar acessando a API.</b></p>
+
+  <p>
+    A imagem de perfil do usuário deve ser enviada na codificação Base64 usando o parâmetro <span
+      class="code">image_data</span>
+    no objeto JSON. Repare que este parâmetro fica fora do objeto <span class="code">user</span>. Caso não seja enviado
+    a imagem de perfil permanecerá inalterada. O tamanho da imagem é limitado a 5 MB.
+  </p>
 
   <pre><code>
     {
@@ -176,7 +185,8 @@
         "name": "Frankson Batista",
         "password": "senhanova",
         "password_confirmation": "senhanova"
-      }
+      },
+      "image_data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgK..."
     }
   </code></pre>
 
@@ -213,14 +223,17 @@
       {
         "login": "just",
         "name": "J. P. Just",
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/just.webp"
       },
       {
         "login": "teste",
         "name": "Testador",
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/teste.webp"
       },
       {
         "login": "frankson",
         "name": "Frankson Barreto",
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/frankson.webp"
       }
     ]
   </code></pre>
@@ -243,6 +256,7 @@
     {
       "login": "just",
       "name": "J. P. Just",
+      "profile_image": "https://api.papacapim.just.pro.br/image/profile/just.webp"
     }
   </code></pre>
 
