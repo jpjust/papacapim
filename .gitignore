@@ -32,4 +32,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Imagens
+/public/image/*.webp
+
 .env
