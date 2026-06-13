@@ -33,6 +33,6 @@
 /config/master.key
 
 # Imagens
-/public/image/*.webp
+/public/image/*
 
 .env
