@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       # Limpa as sessões de alterar a senha
-      # Session.where(user_id: @user.id).destroy_all if @user.password.present?
+      Session.where(user_id: @user.id).destroy_all if @user.password.present?
 
       # Salva a imagem de perfil
       if params[:image_data].present?
