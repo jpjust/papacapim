@@ -26,10 +26,10 @@ Para que o `rbenv` consiga compilar o Ruby será preciso instalar o `ruby-build`
 sudo git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 ```
 
-Instale também o pacote essencial de ferramentas e bibliotecas de compilação do Linux:
+Instale também o pacote essencial de ferramentas, as bibliotecas de compilação do Linux e pacotes necessários:
 
 ```sh
-sudo apt install build-essential
+sudo apt install build-essential imagemagick
 ```
 
 Pronto! Agora já é possível instalar o Ruby. Instale via `rbenv` especificando a versão. Certifique-se de estar usando a versão correspondente à do arquivo `.ruby-version` deste projeto.
