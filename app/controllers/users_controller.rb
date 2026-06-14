@@ -41,12 +41,12 @@ class UsersController < ApplicationController
       Session.where(user_id: @user.id).destroy_all if @user.password.present?
 
       # Salva a imagem de perfil
-      if params[:image_data].present?
+      if user_params[:image_data].present?
         max_file_size = 5.megabytes
         max_base64_size = ((max_file_size * 4.0) / 3).ceil
 
         begin
-          image_data = Base64.strict_decode64(params[:image_data])
+          image_data = Base64.strict_decode64(user_params[:image_data])
 
           if image_data.bytesize <= max_base64_size
             tmp_file = File.join(Rails.root, 'tmp', "#{@user.login}.png")
@@ -81,6 +81,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit([:login, :name, :password, :password_confirmation])
+      params.require(:user).permit([:login, :name, :password, :password_confirmation, :image_data])
     end
 end

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   attribute :profile_image
+  attribute :image_data
 
   def img_file
     File.join(Rails.root, 'public', 'image', 'profile', "#{self.login.strip}.webp")
