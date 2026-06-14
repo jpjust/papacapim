@@ -9,10 +9,15 @@ class Post < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  attribute :user_login
+  attribute :likes_number
+  attribute :replies_number
 
-  def user_login
-    user.try(:login)
+  def likes_number
+    likes.count
+  end
+
+  def replies_number
+    replies.count
   end
 
 end
