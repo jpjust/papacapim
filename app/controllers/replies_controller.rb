@@ -7,9 +7,16 @@ class RepliesController < ApplicationController
   def index
     page = params[:page].to_i || 0
     offset = ENV['POSTS_FEED_PAGELIMIT'] * page
-    render json: @post.replies.limit(ENV['POSTS_FEED_PAGELIMIT']).offset(offset),
-           only: [:user_login, :message, :created_at, :post_id],
-           include: [likes: {only: [:user_login]}]
+    render json: @post.replies
+                      .order(created_at: :asc)
+                      .includes([:user])
+                      .limit(ENV['POSTS_FEED_PAGELIMIT'].to_i)
+                      .offset(offset)
+                      .each{ |p| p.you_liked = p.likes.where(user_id: @current_user.id).count > 0 },
+           only: [:id, :message, :created_at, :post_id, :likes_number, :replies_number, :you_liked],
+           include: [
+             user: {only: [:login, :name, :profile_image]}
+           ]
   end
 
   # POST /posts/:post_id/replies
