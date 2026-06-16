@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   before_action :authorize, only: %i[ index destroy ]
-  before_action :set_session, only: %i[ destroy ]
 
   # GET /sessions
   def index
@@ -27,16 +26,10 @@ class SessionsController < ApplicationController
 
   # DELETE /sessions/1
   def destroy
-    @session.destroy
+    current_session.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_session
-      @session = Session.find(params[:id])
-      render json: {}, status: 404 if @session.nil?
-    end
-
     # Only allow a list of trusted parameters through.
     def session_params
       params.fetch(:session, {})
