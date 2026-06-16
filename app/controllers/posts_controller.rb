@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     page = params[:page].to_i || 0
     offset = ENV['POSTS_FEED_PAGELIMIT'].to_i * page
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
 
     if params[:user_id].present?
       @posts = @posts.where(user_id: User.find_by(login: params[:user_id]))
@@ -18,19 +18,22 @@ class PostsController < ApplicationController
       @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query) 
     end
 
-    render json: @posts.includes([:user]).limit(ENV['POSTS_FEED_PAGELIMIT'].to_i).offset(offset),
-           only: [:id, :message, :created_at, :post_id, :likes_number, :replies_number],
+    render json: @posts.includes([:user, :likes])
+                       .limit(ENV['POSTS_FEED_PAGELIMIT'].to_i)
+                       .offset(offset)
+                       .each{ |p| p.you_liked = p.likes.where(user_id: @current_user.id).count > 0 },
+           only: [:id, :message, :created_at, :post_id, :likes_number, :replies_number, :you_liked],
            include: [
-             user: {only: [:login, :name]}
+             user: {only: [:login, :name, :profile_image]}
            ]
   end
 
   # GET /posts/1
   def show
-    render json: @post.includes([:user]),
-           only: [:id, :message, :created_at, :post_id, :likes_number, :replies_number],
+    render json: @post,
+           only: [:id, :message, :created_at, :post_id, :likes_number, :replies_number, :you_liked],
            include: [
-             user: {only: [:login, :name]}
+             user: {only: [:login, :name, :profile_image]}
            ]
   end
 
