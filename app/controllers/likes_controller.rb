@@ -13,12 +13,8 @@ class LikesController < ApplicationController
   def create
     @like = @post.likes.new
     @like.user_id = current_user.id
-
-    if @like.save
-      render json: @like, only: [:user_login], status: :created, location: post_like_url(@post.id, @like.id)
-    else
-      render json: @like.errors, status: :unprocessable_entity
-    end
+    @like.save
+    render json: @like, only: [:user_login], status: :created
   end
 
   # DELETE /posts/:post_id/likes/1
