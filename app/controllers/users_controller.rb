@@ -14,12 +14,12 @@ class UsersController < ApplicationController
     search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
     @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
-    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), only: [:login, :name, :profile_image]
+    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), only: [:login, :name, :profile_image, :followers_number, :following_number]
   end
 
   # GET /users/login
   def show
-    render json: @user, only: [:login, :name, :profile_image]
+    render json: @user, only: [:login, :name, :profile_image, :followers_number, :following_number]
   end
 
   # POST /users
@@ -75,7 +75,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find_by(login: params[:id])
+      if (params[:id] == 'me')
+        @user = current_user
+      else
+        @user = User.find_by(login: params[:id])
+      end
       render json: {}, status: 404 if @user.nil?
     end
 
