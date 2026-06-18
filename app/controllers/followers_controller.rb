@@ -6,7 +6,11 @@ class FollowersController < ApplicationController
 
   # GET /users/:user_id/followers
   def index
-    render json: @user.followers, only: [:follower_login]
+    render json: @user.followers.includes([:follower]),
+           only: [],
+           include: [
+             follower: { only: [:login, :name, :profile_image] }
+           ]
   end
 
   # POST /users/:user_id/followers
