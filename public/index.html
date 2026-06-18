@@ -190,7 +190,7 @@
     }
   </code></pre>
 
-  <h4>Resposta: 201</h4>
+  <h4>Resposta: 200</h4>
 
   <p>O corpo da resposta conterá um JSON com os novos dados do usuário.</p>
 
@@ -223,17 +223,23 @@
       {
         "login": "just",
         "name": "J. P. Just",
-        "profile_image": "https://api.papacapim.just.pro.br/image/profile/just.webp"
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp",
+        "followers_number": 15482986,
+        "following_number": 1
       },
       {
         "login": "teste",
         "name": "Testador",
-        "profile_image": "https://api.papacapim.just.pro.br/image/profile/teste.webp"
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/c2182b38-ac70-457d-ba3e-da68dbb3a2f1.webp",
+        "followers_number": 0,
+        "following_number": 4920
       },
       {
         "login": "frankson",
         "name": "Frankson Barreto",
-        "profile_image": "https://api.papacapim.just.pro.br/image/profile/frankson.webp"
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/2d203ae9-53df-41ed-bcfd-f1054b37524b.webp",
+        "followers_number": 120,
+        "following_number": 230
       }
     ]
   </code></pre>
@@ -245,7 +251,8 @@
   <h4>Parâmetros de URL</h4>
 
   <ul>
-    <li><span class="code">{login}</span>: (string) Login do usuário que deseja obter.</li>
+    <li><span class="code">{login}</span>: (string) Login do usuário que deseja obter. Use o login <span
+        class="code">me</span> para pegar seu próprio perfil.</li>
   </ul>
 
   <h4>Resposta: 200</h4>
@@ -256,13 +263,15 @@
     {
       "login": "just",
       "name": "J. P. Just",
-      "profile_image": "https://api.papacapim.just.pro.br/image/profile/just.webp"
+      "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp",
+      "followers_number": 15482986,
+      "following_number": 1
     }
   </code></pre>
 
   <!-- Excluir usuário -->
 
-  <h3>Excluir usuário: <span class="code">DELETE /users/1</span></h3>
+  <h3>Excluir usuário: <span class="code">DELETE /users/me</span></h3>
 
   <h4>Resposta: 204</h4>
 
@@ -315,17 +324,25 @@
   <pre><code>
     [
       {
-        "follower_login": "just",
+        "follower": {
+          "login": "teste",
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
+        }
       },
       {
-        "follower_login": "frankson",
+        "follower": {
+          "login": "franks",
+          "name": "Frankson Barreto",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/2d203ae9-53df-41ed-bcfd-f1054b37524b.webp"
+        }
       }
     ]
   </code></pre>
 
   <!-- Deixar de seguir -->
 
-  <h3>Deixar de seguir: <span class="code">DELETE /users/{login}/followers/1</span></h3>
+  <h3>Deixar de seguir: <span class="code">DELETE /users/{login}/followers/me</span></h3>
 
   <h4>Parâmetros de URL</h4>
 
@@ -414,9 +431,11 @@
       "created_at": "2024-08-03T13:36:56.977Z",
       "likes_number": 0,
       "replies_number": 0,
+      "you_liked": false,
       "user": {
         "login": "just",
-        "name": "J. P. Just"
+        "name": "J. P. Just",
+        "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
       }
     }
   </code></pre>
@@ -449,9 +468,11 @@
         "created_at": "2024-08-01T14:30:33.000Z",
         "likes_number": 3,
         "replies_number": 1,
+        "you_liked": false,
         "user": {
           "login": "just",
-          "name": "J. P. Just"
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
         }
       },
       {
@@ -461,9 +482,11 @@
         "created_at": "2024-08-01T14:31:05.000Z",
         "likes_number": 0,
         "replies_number": 0,
+        "you_liked": true,
         "user": {
           "login": "gustavo",
-          "name": "Gustavo Just"
+          "name": "Gustavo Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/28fe8656-d6c7-4b25-b00e-42c60af6c8bf.webp"
         }
       },
       {
@@ -473,9 +496,11 @@
         "created_at": "2024-08-03T13:34:18.103Z",
         "likes_number": 1,
         "replies_number": 1,
+        "you_liked": true,
         "user": {
           "login": "frankson",
-          "name": "Frankson"
+          "name": "Frankson Barreto",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/2d203ae9-53df-41ed-bcfd-f1054b37524b.webp"
         }
       },
       {
@@ -485,9 +510,11 @@
         "created_at": "2024-08-03T13:36:56.977Z",
         "likes_number": 3,
         "replies_number": 0,
+        "you_liked": false,
         "user": {
           "login": "just",
-          "name": "J. P. Just"
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
         }
       }
     ]
@@ -518,9 +545,11 @@
         "created_at": "2024-08-01T14:30:33.000Z",
         "likes_number": 0,
         "replies_number": 0,
+        "you_liked": false,
         "user": {
           "login": "just",
-          "name": "J. P. Just"
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
         }
       },
       {
@@ -530,9 +559,11 @@
         "created_at": "2024-08-03T13:36:56.977Z",
         "likes_number": 3,
         "replies_number": 0,
+        "you_liked": true,
         "user": {
           "login": "just",
-          "name": "J. P. Just"
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
         }
       }
     ]
@@ -557,13 +588,19 @@
   <pre><code>
     [
       {
-        "id": 6,
-        "user_login": "gustavo",
-        "post_id": 2,
-        "message": "Esta rede é muito massa!",
-        "created_at": "2024-08-01T14:31:05.000Z",
-        "likes": [],
-      },
+        "id": 8,
+        "post_id": 7,
+        "message": "Também entrei no Papacapim essa semana. É muito massa!",
+        "created_at": "2024-08-03T13:36:56.977Z",
+        "likes_number": 3,
+        "replies_number": 0,
+        "you_liked": true,
+        "user": {
+          "login": "just",
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
+        }
+      }
     ]
   </code></pre>
 
@@ -629,17 +666,25 @@
   <pre><code>
     [
       {
-        "user_login": "just",
+        "user": {
+          "login": "teste",
+          "name": "J. P. Just",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
+        }
       },
       {
-        "user_login": "frankson",
+        "user": {
+          "login": "franks",
+          "name": "Frankson Barreto",
+          "profile_image": "https://api.papacapim.just.pro.br/image/profile/2d203ae9-53df-41ed-bcfd-f1054b37524b.webp"
+        }
       }
     ]
   </code></pre>
 
   <!-- Remover curtida -->
 
-  <h3>Remover curtida: <span class="code">DELETE /posts/{id}/likes/1</span></h3>
+  <h3>Remover curtida: <span class="code">DELETE /posts/{id}/likes/me</span></h3>
 
   <h4>Parâmetros de URL</h4>
 
