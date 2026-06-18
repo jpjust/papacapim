@@ -51,7 +51,7 @@ class UsersController < ApplicationController
           if image_data.bytesize <= max_base64_size
             tmp_file = File.join(Rails.root, 'tmp', "#{@user.uuid}.png")
             File.binwrite(tmp_file, image_data)
-            system('/usr/bin/convert', tmp_file, @user.img_file)
+            system('/usr/bin/convert', tmp_file, '-resize', '512x512', '-quality', '75', '-define', 'webp:method=6', @user.img_file)
             File.delete(tmp_file)
           end
         rescue ArgumentError => e
