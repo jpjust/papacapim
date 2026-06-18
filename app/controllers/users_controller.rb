@@ -49,10 +49,9 @@ class UsersController < ApplicationController
           image_data = Base64.strict_decode64(user_params[:image_data])
 
           if image_data.bytesize <= max_base64_size
-            tmp_file = File.join(Rails.root, 'tmp', "#{@user.login}.png")
-            dest_file = File.join(Rails.root, 'public', 'image', 'profile', "#{@user.login}.webp")
+            tmp_file = File.join(Rails.root, 'tmp', "#{@user.uuid}.png")
             File.binwrite(tmp_file, image_data)
-            system('/usr/bin/convert', tmp_file, dest_file)
+            system('/usr/bin/convert', tmp_file, @user.img_file)
             File.delete(tmp_file)
           end
         rescue ArgumentError => e

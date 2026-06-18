@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_03_164655) do
+ActiveRecord::Schema[7.0].define(version: 2026_06_18_140131) do
   create_table "followers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "follower_id", null: false
     t.bigint "followed_id", null: false
@@ -52,15 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_03_164655) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "login", null: false
-    t.string "password_digest", null: false
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["login"], name: "index_users_on_login", unique: true
-    t.index ["name"], name: "index_users_on_name", type: :fulltext
-  end
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'uuid' for column 'uuid'
 
   add_foreign_key "followers", "users", column: "followed_id"
   add_foreign_key "followers", "users", column: "follower_id"

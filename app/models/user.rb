@@ -18,12 +18,15 @@ class User < ApplicationRecord
   attribute :followers_number
   attribute :following_number
 
+  before_save :generate_uuid
+  before_destroy :remove_image
+
   def img_file
-    File.join(Rails.root, 'public', 'image', 'profile', "#{self.login.strip}.webp")
+    File.join(Rails.root, 'public', 'image', 'profile', "#{self.uuid}.webp")
   end
 
   def profile_image
-    File.exist?(self.img_file) ? "https://api.papacapim.just.pro.br/image/profile/#{self.login.strip}.webp" : nil
+    File.exist?(self.img_file) ? "https://api.papacapim.just.pro.br/image/profile/#{self.uuid}.webp" : nil
   end
 
   def followers_number
@@ -32,6 +35,16 @@ class User < ApplicationRecord
 
   def following_number
     self.following.count
+  end
+
+  private
+
+  def generate_uuid
+    self.uuid = SecureRandom.uuid unless self.uuid.present?
+  end
+
+  def remove_image
+    File.delete(self.img_file)
   end
 
 end
