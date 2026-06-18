@@ -6,7 +6,11 @@ class LikesController < ApplicationController
 
   # GET /posts/:post_id/likes
   def index
-    render json: @post.likes, only: [:user_login]
+    render json: @post.likes.includes([:user]),
+           only: [],
+           include: [
+             user: { only: [:login, :name, :profile_image] }
+           ]
   end
 
   # POST /posts/:post_id/likes
