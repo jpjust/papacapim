@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   validates :login, :name, :presence => true
   validates :login, :uniqueness => true
+  validates :login, length: { minimum: 3 }
 
   default_scope { order(created_at: :desc) }
 
