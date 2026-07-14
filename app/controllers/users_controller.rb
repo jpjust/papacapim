@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/login
   def update
     @user = current_user
-    if @user.update(params.permit([:login, :name, :password, :password_confirmation, :image_data]))
+    if @user.update(user_params)
       # Limpa as sessões de alterar a senha
       Session.where(user_id: @user.id).destroy_all if @user.password.present?
 
