@@ -14,12 +14,16 @@ class UsersController < ApplicationController
     search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
     @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
-    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i).offset(offset), only: [:login, :name, :profile_image, :followers_number, :following_number]
+    render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i)
+                       .offset(offset)
+                       .each{ |u| u.you_follow = u.followers.where(follower_id: current_user.id).count > 0 },
+           only: [:login, :name, :profile_image, :followers_number, :following_number, :you_follow]
   end
 
   # GET /users/login
   def show
-    render json: @user, only: [:login, :name, :profile_image, :followers_number, :following_number]
+    @user.you_follow = @user.followers.where(follower_id: current_user.id).count > 0
+    render json: @user, only: [:login, :name, :profile_image, :followers_number, :following_number, :you_follow]
   end
 
   # POST /users

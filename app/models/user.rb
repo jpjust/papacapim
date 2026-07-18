@@ -18,6 +18,7 @@ class User < ApplicationRecord
   attribute :image_data
   attribute :followers_number
   attribute :following_number
+  attribute :you_follow
 
   before_save :generate_uuid
   before_destroy :remove_image
