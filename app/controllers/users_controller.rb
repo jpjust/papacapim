@@ -16,14 +16,18 @@ class UsersController < ApplicationController
 
     render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i)
                        .offset(offset)
-                       .each{ |u| u.you_follow = u.followers.where(follower_id: current_user.id).count > 0 },
-           only: [:login, :name, :profile_image, :followers_number, :following_number, :you_follow]
+                       .each{ |u|
+                         u.you_follow = u.followers.where(follower_id: current_user.id).count > 0
+                         u.follows_you = u.following.where(followed_id: current_user.id).count > 0
+                       },
+           only: [:login, :name, :profile_image, :followers_number, :following_number, :you_follow, :follows_you]
   end
 
   # GET /users/login
   def show
     @user.you_follow = @user.followers.where(follower_id: current_user.id).count > 0
-    render json: @user, only: [:login, :name, :profile_image, :followers_number, :following_number, :you_follow]
+    @user.follows_you = @user.following.where(followed_id: current_user.id).count > 0
+    render json: @user, only: [:login, :name, :profile_image, :followers_number, :following_number, :you_follow, :follows_you]
   end
 
   # POST /users
