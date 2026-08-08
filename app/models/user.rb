@@ -12,8 +12,6 @@ class User < ApplicationRecord
   validates :login, :uniqueness => true
   validates :login, length: { minimum: 3 }
 
-  default_scope { order(created_at: :desc) }
-
   attribute :profile_image
   attribute :image_data
   attribute :followers_number

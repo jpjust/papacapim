@@ -5,8 +5,6 @@ class Like < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :post_id }
 
-  default_scope { order(created_at: :desc) }
-
   attribute :user_login
 
   def user_login
