@@ -11,8 +11,21 @@ class UsersController < ApplicationController
     @users = User.all
 
     # Filters (for user search)
-    search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
-    @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
+    search_query = ''
+    first_word = true;
+    params[:search].to_s.strip.split.each do |word|
+      search_query += ',' unless first_word
+      search_query += "*#{word.gsub(/[^a-zA-Z0-9]+/, '*')}*"
+      first_word = false
+    end
+    @users = @users.select("users.*, MATCH(name) AGAINST('#{search_query}' IN NATURAL LANGUAGE MODE) as score")
+                   .where('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', search_query) if params[:search].present?
+
+    if params[:search].present?
+      @users = @users.order(score: :desc)
+    else
+      @users = @users.order(created_at: :desc)
+    end
 
     render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i)
                        .offset(offset)
