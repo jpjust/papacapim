@@ -13,13 +13,13 @@ class UsersController < ApplicationController
     # Filters (for user search)
     search_query = ''
     first_word = true;
-    params[:search].to_s.strip.split.each do |word|
+    params[:search].to_s.gsub(/[^a-zA-Z0-9]+/, ' ').strip.split.each do |word|
       search_query += ',' unless first_word
-      search_query += "*#{word.gsub(/[^a-zA-Z0-9]+/, '*')}*"
+      search_query += word + '*'
       first_word = false
     end
-    @users = @users.select("users.*, MATCH(name) AGAINST('#{search_query}' IN NATURAL LANGUAGE MODE) as score")
-                   .where('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', search_query) if params[:search].present?
+    @users = @users.select("users.*, MATCH(name) AGAINST('#{search_query}' IN BOOLEAN MODE) as score")
+                   .where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
     if params[:search].present?
       @users = @users.order(score: :desc)
