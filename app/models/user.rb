@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def remove_image
-    File.delete(self.img_file)
+    File.delete(self.img_file) if File.exist?(self.img_file)
   end
 
 end
