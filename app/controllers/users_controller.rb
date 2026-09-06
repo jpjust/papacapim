@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       search_query += word + '*'
       first_word = false
     end
-    @users = @users.select("users.*, MATCH(name) AGAINST('#{search_query}' IN BOOLEAN MODE) as score")
+    @users = @users.select("users.*, MATCH(name) AGAINST('#{search_query}' IN BOOLEAN MODE) AS score")
                    .where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
     if params[:search].present?
@@ -73,7 +73,9 @@ class UsersController < ApplicationController
             tmp_file = File.join(Rails.root, 'tmp', "#{@user.uuid}.png")
             File.binwrite(tmp_file, image_data)
             system('/usr/bin/convert', tmp_file, '-auto-orient', '-resize', '512x512', '-quality', '75', '-define', 'webp:method=6', @user.img_file)
-            File.delete(tmp_file)
+            File.delete(tmp_file) if File.exist?(tmp_file)
+          else
+            raise ArgumentError, "Image data exceeds maximum allowed size of #{max_file_size} bytes."
           end
         rescue ArgumentError => e
           puts e.message
