@@ -14,8 +14,21 @@ class PostsController < ApplicationController
     elsif params[:feed].to_i == 1
       @posts = Post.where(user_id: current_user.following.map(&:followed_id))
     elsif params[:search].present?
-      search_query = params[:search].to_s.strip.gsub(/\s+/, '*,') + '*'
-      @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query) 
+      search_query = ''
+      first_word = true;
+      params[:search].to_s.gsub(/@+/, ' ').strip.split.each do |word|
+        search_query += ',' unless first_word
+        search_query += word + '*'
+      first_word = false
+    end
+      @posts = @posts.select("posts.*, MATCH(message) AGAINST('#{search_query}' IN BOOLEAN MODE) AS score")
+                     .where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query)
+    end
+
+    if params[:search].present?
+      @posts = @posts.order(score: :desc)
+    else
+      @posts = @posts.order(created_at: :desc)
     end
 
     render json: @posts.includes([:user, :likes])
