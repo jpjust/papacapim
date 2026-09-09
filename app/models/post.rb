@@ -12,8 +12,6 @@ class Post < ApplicationRecord
   attribute :replies_number
   attribute :you_liked
 
-  # accepts_nested_attributes_for :media, allow_destroy: true
-
   def likes_number
     likes.count
   end
