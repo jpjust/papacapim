@@ -15,7 +15,11 @@ class Medium < ApplicationRecord
   end
 
   def medium_url
-    File.exist?(self.medium_file) ? "https://api.papacapim.just.pro.br/image/media/#{self.uuid}.webp" : nil
+    if Rails.env.development?
+      File.exist?(self.medium_file) ? "http://localhost:3002/image/media/#{self.uuid}.webp" : nil
+    else
+      File.exist?(self.medium_file) ? "https://api.papacapim.just.pro.br/image/media/#{self.uuid}.webp" : nil
+    end
   end
 
   private

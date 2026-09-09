@@ -27,7 +27,11 @@ class User < ApplicationRecord
   end
 
   def profile_image
-    File.exist?(self.img_file) ? "https://api.papacapim.just.pro.br/image/profile/#{self.uuid}.webp" : nil
+    if Rails.env.development?
+      File.exist?(self.img_file) ? "http://localhost:3002/image/profile/#{self.uuid}.webp" : nil
+    else
+      File.exist?(self.img_file) ? "https://api.papacapim.just.pro.br/image/profile/#{self.uuid}.webp" : nil
+    end
   end
 
   def followers_number
