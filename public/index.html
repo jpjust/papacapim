@@ -384,13 +384,23 @@
 
   <h4>Corpo</h4>
 
-  <p>Um objeto JSON contendo a postagem.</p>
+  <p>Um objeto JSON contendo a postagem. Opcionalmente, uma lista de mídia, contendo imagens que serão postadas junto
+    com a mensagem. Os dados da imagem devem estar no formato Base64 e com no máximo 50 MB.</p>
 
   <pre><code>
     {
-      "post": {
-        "message": "Acabei de entrar no Papacapim!"
-      }
+      "message": "Acabei de entrar no Papacapim!",
+      "media": [
+        {
+          "medium_type": "image",
+          "medium_data": "abc..."
+        },
+        {
+          "medium_type": "image",
+          "medium_data": "def..."
+        },
+        ...
+      ]
     }
   </code></pre>
 
