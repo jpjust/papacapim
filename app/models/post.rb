@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
+  has_many :media, :dependent => :destroy
   has_many :replies, class_name: 'Post', foreign_key: 'post_id', :dependent => :destroy
   has_many :likes, :dependent => :destroy
 
@@ -10,6 +11,8 @@ class Post < ApplicationRecord
   attribute :likes_number
   attribute :replies_number
   attribute :you_liked
+
+  # accepts_nested_attributes_for :media, allow_destroy: true
 
   def likes_number
     likes.count

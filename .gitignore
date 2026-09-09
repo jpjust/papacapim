@@ -35,5 +35,7 @@
 # Imagens
 /public/image/profile/*
 !/public/image/profile/.keep
+/public/image/media/*
+!/public/image/media/.keep
 
 .env

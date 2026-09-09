@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_06_18_140131) do
+ActiveRecord::Schema[7.0].define(version: 2026_09_09_170215) do
   create_table "followers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "follower_id", null: false
     t.bigint "followed_id", null: false
@@ -29,6 +29,15 @@ ActiveRecord::Schema[7.0].define(version: 2026_06_18_140131) do
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true, using: :hash
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "media", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.string "uuid", null: false
+    t.string "medium_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_media_on_post_id"
   end
 
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -59,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_06_18_140131) do
   add_foreign_key "followers", "users", column: "follower_id"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "media", "posts"
   add_foreign_key "posts", "posts"
   add_foreign_key "posts", "users"
   add_foreign_key "sessions", "users"
