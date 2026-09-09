@@ -62,7 +62,7 @@ class PostsController < ApplicationController
       max_file_size = 50.megabytes
       max_base64_size = ((max_file_size * 4.0) / 3).ceil
 
-      params[:post][:media].each do |media_attr|
+      params[:media].each do |media_attr|
         next unless media_attr[:medium_type] == 'image'
 
         begin
