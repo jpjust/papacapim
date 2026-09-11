@@ -62,24 +62,26 @@ class PostsController < ApplicationController
       max_file_size = 50.megabytes
       max_base64_size = ((max_file_size * 4.0) / 3).ceil
 
-      params[:media].each do |media_attr|
-        next unless media_attr[:medium_type] == 'image'
+      if params[:media].present?
+        params[:media].each do |media_attr|
+          next unless media_attr[:medium_type] == 'image'
 
-        begin
-          media = @post.media.build(medium_type: media_attr[:medium_type])
-          medium_data = Base64.strict_decode64(media_attr[:medium_data])
+          begin
+            media = @post.media.build(medium_type: media_attr[:medium_type])
+            medium_data = Base64.strict_decode64(media_attr[:medium_data])
 
-          if medium_data.bytesize <= max_base64_size
-            tmp_file = File.join(Rails.root, 'tmp', "#{media.uuid}.png")
-            File.binwrite(tmp_file, medium_data)
-            system('/usr/bin/convert', tmp_file, '-auto-orient', '-resize', '512x512', '-quality', '75', '-define', 'webp:method=6', media.medium_file)
-            File.delete(tmp_file) if File.exist?(tmp_file)
-            media.save
-          else
-            raise ArgumentError, "Media data exceeds maximum allowed size of #{max_file_size} bytes."
+            if medium_data.bytesize <= max_base64_size
+              tmp_file = File.join(Rails.root, 'tmp', "#{media.uuid}.png")
+              File.binwrite(tmp_file, medium_data)
+              system('/usr/bin/convert', tmp_file, '-auto-orient', '-resize', '512x512', '-quality', '75', '-define', 'webp:method=6', media.medium_file)
+              File.delete(tmp_file) if File.exist?(tmp_file)
+              media.save
+            else
+              raise ArgumentError, "Media data exceeds maximum allowed size of #{max_file_size} bytes."
+            end
+          rescue ArgumentError => e
+            puts e.message
           end
-        rescue ArgumentError => e
-          puts e.message
         end
       end
 
