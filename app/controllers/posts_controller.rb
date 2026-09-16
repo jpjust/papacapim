@@ -64,16 +64,23 @@ class PostsController < ApplicationController
 
       if params[:media].present?
         params[:media].each do |media_attr|
-          next unless media_attr[:medium_type] == 'image'
+          next unless ['image', 'video'].include?(media_attr[:medium_type])
 
           begin
             media = @post.media.build(medium_type: media_attr[:medium_type])
             medium_data = Base64.strict_decode64(media_attr[:medium_data])
 
             if medium_data.bytesize <= max_base64_size
-              tmp_file = File.join(Rails.root, 'tmp', "#{media.uuid}.png")
+              tmp_file = File.join(Rails.root, 'tmp', "#{media.uuid}.media")
               File.binwrite(tmp_file, medium_data)
-              system('/usr/bin/convert', tmp_file, '-auto-orient', '-resize', '512x512', '-quality', '75', '-define', 'webp:method=6', media.medium_file)
+
+              case media_attr[:medium_type]
+              when 'image'
+                system('/usr/bin/convert', tmp_file, '-auto-orient', '-quality', '75', '-define', 'webp:method=6', media.medium_file)
+              when 'video'
+                system('/usr/bin/ffmpeg', '-i', tmp_file, media.medium_file)
+              end
+
               File.delete(tmp_file) if File.exist?(tmp_file)
               media.save
             else
