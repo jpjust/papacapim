@@ -29,7 +29,7 @@ class Medium < ApplicationRecord
     when 'image'
       return 'webp'
     when 'video'
-      return 'webm'
+      return 'mp4'
     end
 
     ''

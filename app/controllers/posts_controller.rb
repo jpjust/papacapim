@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  require 'fileutils'
+
   before_action :authorize
   before_action :set_post, only: %i[ show update destroy ]
 
@@ -78,7 +80,7 @@ class PostsController < ApplicationController
               when 'image'
                 system('/usr/bin/convert', tmp_file, '-auto-orient', '-quality', '75', '-define', 'webp:method=6', media.medium_file)
               when 'video'
-                system('/usr/bin/ffmpeg', '-i', tmp_file, media.medium_file)
+                FileUtils.cp(tmp_file, media.medium_file)
               end
 
               File.delete(tmp_file) if File.exist?(tmp_file)
