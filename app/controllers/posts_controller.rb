@@ -80,7 +80,7 @@ class PostsController < ApplicationController
               when 'image'
                 system('/usr/bin/convert', tmp_file, '-auto-orient', '-quality', '75', '-define', 'webp:method=6', media.medium_file)
               when 'video'
-                FileUtils.cp(tmp_file, media.medium_file)
+                system('/usr/bin/ffmpeg', '-i', tmp_file, '-c:v', 'libx264', '-crf', '28', '-preset', 'ultrafast', '-c:a', 'aac', '-b:a', '96k', media.medium_file)
               end
 
               File.delete(tmp_file) if File.exist?(tmp_file)
