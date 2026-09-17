@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
     if @post.save
       # Salva as imagens associadas ao post, se houver
-      max_file_size = 50.megabytes
+      max_file_size = 200.megabytes
       max_base64_size = ((max_file_size * 4.0) / 3).ceil
 
       if params[:media].present?
