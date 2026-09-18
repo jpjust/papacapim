@@ -453,15 +453,7 @@
       "id": 6,
       "post_id": 2,
       "message": "É muita melodia!",
-      "created_at": "2024-08-01T14:31:05.000Z",
-      "likes_number": 0,
-      "replies_number": 0,
-      "you_liked": false,
-      "user": {
-          "login": "gustavo",
-          "name": "Gustavo Just",
-          "profile_image": "https://api.papacapim.just.pro.br/image/profile/28fe8656-d6c7-4b25-b00e-42c60af6c8bf.webp"
-        }
+      "created_at": "2024-08-01T14:31:05.000Z"
     }
   </code></pre>
 
@@ -498,7 +490,13 @@
           "login": "just",
           "name": "J. P. Just",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
-        }
+        },
+        "media": [
+          {
+            "medium_type": "video",
+            "medium_url": "http://localhost:3002/image/media/c5f745f5-e615-4045-911c-a69e23bff4f3.mp4"
+          }
+        ]
       },
       {
         "id": 6,
@@ -512,7 +510,13 @@
           "login": "gustavo",
           "name": "Gustavo Just",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/28fe8656-d6c7-4b25-b00e-42c60af6c8bf.webp"
-        }
+        },
+        "media": [
+          {
+            "medium_type": "image",
+            "medium_url": "https://api.papacapim.just.pro.br/image/media/34628681-3ea9-4161-8571-8b577696321e.webm"
+          }
+        ]
       },
       {
         "id": 7,
@@ -526,7 +530,8 @@
           "login": "franks",
           "name": "Franks Barreto",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/2d203ae9-53df-41ed-bcfd-f1054b37524b.webp"
-        }
+        },
+        "media": []
       },
       {
         "id": 8,
@@ -540,7 +545,8 @@
           "login": "just",
           "name": "J. P. Just",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
-        }
+        },
+        "media": []
       }
     ]
   </code></pre>
@@ -559,7 +565,8 @@
 
   <h4>Resposta: 200</h4>
 
-  <p>O corpo da resposta conterá um JSON com a lista de postagens.</p>
+  <p>O corpo da resposta conterá um JSON com a lista de postagens. Se a postagem tiver alguma mídia, ela irá estar
+    dentro de <span class="code">media</span>.</p>
 
   <pre><code>
     [
@@ -575,7 +582,13 @@
           "login": "just",
           "name": "J. P. Just",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/fa87ebb3-ef93-48d6-b437-2c4bdbbd0686.webp"
-        }
+        },
+        "media": [
+          {
+            "medium_type": "video",
+            "medium_url": "https://api.papacapim.just.pro.br/image/media/c5f745f5-e615-4045-911c-a69e23bff4f3.mp4"
+          }
+        ]
       },
       {
         "id": 6,
@@ -589,7 +602,13 @@
           "login": "gustavo",
           "name": "Gustavo Just",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/28fe8656-d6c7-4b25-b00e-42c60af6c8bf.webp"
-        }
+        },
+        "media": [
+          {
+            "medium_type": "image",
+            "medium_url": "https://api.papacapim.just.pro.br/image/media/34628681-3ea9-4161-8571-8b577696321e.webm"
+          }
+        ]
       }
     ]
   </code></pre>
@@ -624,7 +643,13 @@
           "login": "gustavo",
           "name": "Gustavo Just",
           "profile_image": "https://api.papacapim.just.pro.br/image/profile/28fe8656-d6c7-4b25-b00e-42c60af6c8bf.webp"
-        }
+        },
+        "media": [
+          {
+            "medium_type": "image",
+            "medium_url": "https://api.papacapim.just.pro.br/image/media/34628681-3ea9-4161-8571-8b577696321e.webm"
+          }
+        ]
       }
     ]
   </code></pre>
