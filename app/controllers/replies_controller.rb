@@ -26,11 +26,7 @@ class RepliesController < ApplicationController
     @reply.user_id = current_user.id
 
     if @reply.save
-      render json: @reply,
-             only: [:id, :message, :created_at, :post_id, :likes_number, :replies_number, :you_liked],
-             include: [
-               user: {only: [:login, :name, :profile_image]}
-             ]
+      render json: @reply, only: [:id, :message, :created_at, :post_id]
     else
       render json: @reply.errors, status: :unprocessable_entity
     end
