@@ -18,8 +18,7 @@ class UsersController < ApplicationController
       search_query += word + '*'
       first_word = false
     end
-    @users = @users.select("users.*, MATCH(name) AGAINST('#{search_query}' IN BOOLEAN MODE) AS score")
-                   .where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
+    @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
 
     if params[:search].present?
       @users = @users.order(score: :desc)

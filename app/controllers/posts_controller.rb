@@ -23,8 +23,7 @@ class PostsController < ApplicationController
         search_query += word + '*'
       first_word = false
     end
-      @posts = @posts.select("posts.*, MATCH(message) AGAINST('#{search_query}' IN BOOLEAN MODE) AS score")
-                     .where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query)
+      @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query)
     end
 
     if params[:search].present?
