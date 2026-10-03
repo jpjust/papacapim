@@ -26,11 +26,7 @@ class PostsController < ApplicationController
       @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query)
     end
 
-    if params[:search].present?
-      @posts = @posts.order(score: :desc)
-    else
-      @posts = @posts.order(created_at: :desc)
-    end
+    @posts = @posts.order(created_at: :desc)
 
     render json: @posts.includes([:user, :likes])
                        .limit(ENV['POSTS_FEED_PAGELIMIT'].to_i)

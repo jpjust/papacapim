@@ -19,12 +19,7 @@ class UsersController < ApplicationController
       first_word = false
     end
     @users = @users.where('MATCH(name) AGAINST(? IN BOOLEAN MODE)', search_query) if params[:search].present?
-
-    if params[:search].present?
-      @users = @users.order(score: :desc)
-    else
-      @users = @users.order(created_at: :desc)
-    end
+    @users = @users.order(created_at: :desc)
 
     render json: @users.limit(ENV['USERLIST_PAGELIMIT'].to_i)
                        .offset(offset)
