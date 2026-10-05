@@ -2,6 +2,8 @@ class PostsController < ApplicationController
 
   require 'fileutils'
 
+  # include ActiveRecord::Sanitization::ClassMethods
+
   before_action :authorize
   before_action :set_post, only: %i[ show update destroy ]
 
@@ -21,9 +23,9 @@ class PostsController < ApplicationController
       params[:search].to_s.gsub(/@+/, ' ').strip.split.each do |word|
         search_query += ',' unless first_word
         search_query += word + '*'
-      first_word = false
-    end
-      @posts = @posts.where('MATCH(message) AGAINST(? IN BOOLEAN MODE)', search_query)
+        first_word = false
+      end
+      @posts = @posts.where('MATCH(message) AGAINST("?" IN BOOLEAN MODE)', search_query)
     end
 
     @posts = @posts.order(created_at: :desc)
